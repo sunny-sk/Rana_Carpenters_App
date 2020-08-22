@@ -1,5 +1,4 @@
 const BASE_URL = 'https://api.bazarkasamaan.com';
-// const BASE_URL = 'http://3.16.150.241';
 
 export default {
   _imageBase:

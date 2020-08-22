@@ -1,4 +1,4 @@
-package com.carpenterbro.carpenterbro;
+package com.ranacarpenters.ranacarpenters;
 import android.app.Application;
 import android.content.Context;
 import com.facebook.react.PackageList;
@@ -10,7 +10,7 @@ import com.facebook.react.ReactPackage;
 import com.facebook.soloader.SoLoader;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
-
+import com.azendoo.reactnativesnackbar.SnackbarPackage;
 
 
 public class MainApplication extends Application implements ReactApplication {

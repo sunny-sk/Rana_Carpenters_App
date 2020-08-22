@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import ListItem from '../../components/ListItem';
 import colors from '../../constants/colors';
@@ -16,9 +16,6 @@ const AboutUsScreenView = ({
   callModalVisible,
   setCallModalVisible,
 }) => {
-  useEffect((params) => {
-    console.log('[About View] screen loaded');
-  }, []);
   return (
     <>
       <View style={styles.container}>

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   StyleSheet,
   ActivityIndicator,
@@ -13,11 +13,15 @@ import {
 import RNFetchBlob from 'rn-fetch-blob';
 import Icon from './Icon';
 import colors from '../constants/colors';
+import {useNetInfo} from '@react-native-community/netinfo';
 const WIDTH = Dimensions.get('screen').width;
 const CarouselItem = ({imageUrl, ...props}) => {
+  const [connection, setConnection] = useState(true);
+  const netInfo = useNetInfo();
   const android = RNFetchBlob.android;
   const [isDownLoading, setIsDownLoading] = useState(false);
-
+  const [imgError, setImageError] = useState(false);
+  const [isImageLoading, setIsImageLoading] = useState(true);
   const handleDownload = async () => {
     // if device is android you have to ensure you have permission
     let dirs = RNFetchBlob.fs.dirs;
@@ -70,16 +74,13 @@ const CarouselItem = ({imageUrl, ...props}) => {
       });
   };
 
+  useEffect(() => {
+    setConnection(!connection);
+  }, [netInfo]);
   const donwLoadImage = async () => {
     try {
       const granted = await PermissionsAndroid.request(
         PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
-        // {
-        //   title: 'Image Download Permission',
-        //   message: 'Your permission is required to save images to your device',
-        //   buttonNegative: 'Cancel',
-        //   buttonPositive: 'OK',
-        // },
       );
       if (granted === 'granted') {
         handleDownload();
@@ -89,54 +90,102 @@ const CarouselItem = ({imageUrl, ...props}) => {
     } catch (error) {}
   };
 
+  const checkNet = () => {
+    if (
+      (netInfo.type === 'unknown' || netInfo.type !== 'unknown') &&
+      netInfo.isInternetReachable === false
+    ) {
+      return null;
+    }
+    return (
+      <View style={{}}>
+        <TouchableOpacity
+          style={styles.downLoadBtn}
+          disabled={isDownLoading}
+          onPress={donwLoadImage}>
+          {isDownLoading ? (
+            <ActivityIndicator size={'small'} color="#fff" />
+          ) : (
+            <Icon
+              from="MaterialCommunityIcons"
+              name="download-circle-outline"
+              bgColor="transparent"
+              color={colors.light}
+              size={40}
+            />
+          )}
+        </TouchableOpacity>
+      </View>
+    );
+  };
+
   return (
     <View style={styles.upperContainer}>
       <View style={styles.container}>
-        <Image
-          resizeMode="cover"
-          style={styles.image}
-          source={
-            !imageUrl
-              ? require('../assets/images/not-found.png')
-              : {uri: imageUrl}
-          }
-        />
-        <View style={styles.btns}>
-          <View style={{marginVertical: 5}}>
-            <TouchableOpacity
-              onPress={() => {
-                props.navigation.navigate('viewImageScreen', {
-                  imgUrl: imageUrl,
-                });
-              }}>
-              <Icon
-                from="MaterialCommunityIcons"
-                name="arrow-expand-all"
-                bgColor="rgba(0,0,0,0.6)"
-                color={colors.light}
-                size={40}
-              />
-            </TouchableOpacity>
-          </View>
-          <View style={{}}>
-            <TouchableOpacity
-              style={styles.downLoadBtn}
-              disabled={isDownLoading}
-              onPress={donwLoadImage}>
-              {isDownLoading ? (
-                <ActivityIndicator size={'small'} color="#fff" />
-              ) : (
+        <>
+          <Image
+            resizeMode="cover"
+            style={{...styles.image, display: 'none'}}
+            onLoad={() => {
+              setIsImageLoading(true);
+            }}
+            onLoadEnd={() => {
+              setIsImageLoading(false);
+            }}
+            onLoadStart={() => {
+              setIsImageLoading(true);
+            }}
+            onError={(err) => {
+              setIsImageLoading(false);
+              setImageError(true);
+            }}
+            source={
+              !imageUrl
+                ? require('../assets/images/not-found.png')
+                : {uri: imageUrl}
+            }
+          />
+          {isImageLoading ? (
+            <>
+              <View style={{flex: 1, justifyContent: 'center'}}>
+                <ActivityIndicator color="red" size="large" />
+              </View>
+            </>
+          ) : imgError ? (
+            <Image
+              resizeMode="cover"
+              style={styles.image}
+              source={require('../assets/images/not-found.png')}
+            />
+          ) : (
+            <Image
+              resizeMode="cover"
+              style={styles.image}
+              source={{uri: imageUrl}}
+            />
+          )}
+        </>
+        {!imgError && !isImageLoading && (
+          <View style={styles.btns}>
+            <View style={{marginVertical: 5}}>
+              <TouchableOpacity
+                onPress={() => {
+                  props.navigation.navigate('viewImageScreen', {
+                    imgUrl: imageUrl,
+                  });
+                }}>
                 <Icon
                   from="MaterialCommunityIcons"
-                  name="download-circle-outline"
-                  bgColor="transparent"
+                  name="arrow-expand-all"
+                  bgColor="rgba(0,0,0,0.6)"
                   color={colors.light}
                   size={40}
                 />
-              )}
-            </TouchableOpacity>
+              </TouchableOpacity>
+            </View>
+            {checkNet()}
           </View>
-        </View>
+        )}
       </View>
     </View>
   );

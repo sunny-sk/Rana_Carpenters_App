@@ -11,10 +11,11 @@ const OfflineNotice = () => {
   ) {
     return (
       <>
-        <StatusBar
+        {/* <StatusBar
           backgroundColor={colors.secondry2}
           barStyle={'light-content'}
-        />
+        /> */}
+        <StatusBar backgroundColor={colors.light} barStyle={'dark-content'} />
         <View style={styles.container}>
           <View style={styles.info}>
             <Text style={{fontSize: 18, color: '#fad744'}}>

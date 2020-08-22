@@ -12,7 +12,6 @@
     "install:release": "npx react-native run-android --variant=release"
   },
   "dependencies": {
-    "react-native-progress": "^4.1.2",
     "@react-native-community/async-storage": "^1.11.0",
     "@react-native-community/masked-view": "^0.1.10",
     "@react-native-community/netinfo": "^5.9.5",
@@ -24,9 +23,11 @@
     "react": "16.13.1",
     "react-native": "0.63.2",
     "react-native-gesture-handler": "^1.7.0",
+    "react-native-progress": "^4.1.2",
     "react-native-reanimated": "^1.10.1",
     "react-native-safe-area-context": "^3.1.1",
     "react-native-screens": "^2.9.0",
+    "react-native-snackbar": "^2.2.3",
     "react-native-splash-screen": "^3.2.0",
     "react-native-vector-icons": "^7.0.0",
     "rn-fetch-blob": "^0.12.0",
