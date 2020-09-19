@@ -7,6 +7,7 @@ import {
   Dimensions,
   Image,
   Alert,
+  Vibration,
   PermissionsAndroid,
 } from 'react-native';
 
@@ -40,6 +41,7 @@ const CarouselItem = ({imageUrl, ...props}) => {
       .fetch('GET', imageUrl)
       .then((res) => {
         setIsDownLoading(false);
+        Vibration.vibrate(500);
         Alert.alert(
           'Product Design download successfully',
           'Press ok to view image',

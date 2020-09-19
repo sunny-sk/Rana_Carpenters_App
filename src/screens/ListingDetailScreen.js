@@ -7,9 +7,12 @@ import {
   View,
   StatusBar,
 } from 'react-native';
+import RNFetchBlob from 'rn-fetch-blob';
+import Share from 'react-native-share';
 import {AppText, Icon} from '../components';
 import colors from '../constants/colors';
 import Carousel from '../components/Carousel';
+import url from '../helper/url';
 const ListingDetailScreen = ({route, ...props}) => {
   const [detail, setDetails] = useState(undefined);
   useEffect(() => {
@@ -31,10 +34,42 @@ const ListingDetailScreen = ({route, ...props}) => {
 
     setDetails(data);
   }, [route.params]);
-  const onShare = () => {
-    Linking.openURL(
-      `whatsapp://send?text=*Rana Carpenters*\n${detail.title}\n\nclick below to share design with your friends \n------------------------------------\n${detail.share_url}`,
-    );
+  const onShare = async () => {
+    try {
+      // Linking.openURL(
+      //   `whatsapp://send?text=*Rana Carpenters*\n${detail.title}\n\nclick below to open design \n------------------------------------\n${detail.share_url}`,
+      // );
+      const fs = RNFetchBlob.fs;
+
+      let imagePath = null;
+      RNFetchBlob.config({
+        fileCache: true,
+      })
+        .fetch('GET', url._inventoryBase + detail.imgUrl)
+        // the image is now dowloaded to device's storage
+        .then((resp) => {
+          // the image path you can use it directly with Image component
+          imagePath = resp.path();
+          return resp.readFile('base64');
+        })
+        .then((base64Data) => {
+          const shareOptions = {
+            title: 'Share via whatsapp',
+            message: `Rana Carpenters*\n${detail.title}\n\nclick below to open design \n------------------------------------\n${detail.share_url}`,
+            url: `data:image/png;base64,${base64Data}`,
+            social: Share.Social.WHATSAPP,
+            filename: 'test', // only for base64 file in Android
+          };
+          Share.shareSingle(shareOptions)
+            .then((res) => {
+              fs.unlink(imagePath);
+            })
+            .catch((err) => {
+              err && console.log(err);
+            });
+          return;
+        });
+    } catch (error) {}
   };
 
   return (
