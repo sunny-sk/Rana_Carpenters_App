@@ -55,7 +55,7 @@ const ListingDetailScreen = ({route, ...props}) => {
         .then((base64Data) => {
           const shareOptions = {
             title: 'Share via whatsapp',
-            message: `Rana Carpenters*\n${detail.title}\n\nclick below to open design \n------------------------------------\n${detail.share_url}`,
+            message: `*Rana Carpenters*\n${detail.title}\n\nclick below to open design on browser \n------------------------------------\n${detail.share_url}`,
             url: `data:image/png;base64,${base64Data}`,
             social: Share.Social.WHATSAPP,
             filename: 'test', // only for base64 file in Android

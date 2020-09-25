@@ -16,12 +16,10 @@ import colors from '../../constants/colors';
 
 const ListingsScreen = ({navigation}) => {
   const netInfo = useNetInfo();
-
   const [activatedCategory, setActivatedCategory] = useState(undefined);
   const [isLoading, setIsLoading] = useState(false);
   const [productListings, setProductListings] = useState([]);
   const [productListingsTemp, setProductListingsTemp] = useState([]);
-
   const [categories, setCategories] = useState([]);
 
   const fetcAllProducts = async (loading, cb) => {
@@ -85,16 +83,14 @@ const ListingsScreen = ({navigation}) => {
       filterCategory('All');
     }
   };
+
   const filterCategory = (filterName) => {
-    if (filterName === 'All') {
-      setProductListingsTemp([...productListings]);
-      setActivatedCategory('All');
-    } else {
-      let all = [...productListings];
-      all = all.filter((e) => e.category === filterName);
-      setActivatedCategory(filterName);
-      setProductListingsTemp([...all]);
-    }
+    setActivatedCategory(filterName === 'All' ? 'All' : filterName);
+    if (filterName === 'All') setProductListingsTemp([...productListings]);
+    else
+      setProductListingsTemp([
+        ...productListings.filter((e) => e.category === filterName),
+      ]);
   };
 
   useEffect(() => {
@@ -114,6 +110,24 @@ const ListingsScreen = ({navigation}) => {
   //     });
   //   }
   // }, []);
+
+  React.useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', async () => {
+      // The screen is focused
+      try {
+        const response = await getAllProducts();
+        if (response.success && response.products.length > 0) {
+          setProductListingsTemp(shuffle([...response.products]));
+          setProductListings(shuffle([...response.products]));
+        }
+      } catch (error) {
+        //nothing to do
+      }
+    });
+
+    // Return the function to unsubscribe from the event so it gets removed on unmount
+    return unsubscribe;
+  }, [navigation]);
 
   return (
     <>

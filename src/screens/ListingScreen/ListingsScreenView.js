@@ -1,5 +1,5 @@
 // Rn imports
-import React, {useEffect, useState, useRef} from 'react';
+import React, {useState, useRef} from 'react';
 import {
   StyleSheet,
   Text,
@@ -9,8 +9,8 @@ import {
   Animated,
   RefreshControl,
 } from 'react-native';
-
 //custom import
+
 import Card from '../../components/Card';
 import AppActivityIndicator from '../../components/AppActivityIndicator';
 import CategoriesList from '../../components/CategoriesList';
@@ -52,6 +52,7 @@ const ListingsScreenView = ({
     inputRange: [0, 50],
     outputRange: [50, 0],
   });
+
   return (
     <>
       {isLoading ? (
@@ -120,9 +121,7 @@ const ListingsScreenView = ({
                 justifyContent: 'center',
                 alignItems: 'center',
               }}>
-              <Text style={styles.infoText}>
-                No Design found With this category
-              </Text>
+              <Text style={styles.infoText}>No Design found</Text>
               <TouchableOpacity
                 style={{marginVertical: 10}}
                 onPress={onRefreshClick}>
@@ -150,7 +149,7 @@ const ListingsScreenView = ({
   );
 };
 
-export default ListingsScreenView;
+export default React.memo(ListingsScreenView);
 const styles = StyleSheet.create({
   categoryContainer: {
     height: 50,
