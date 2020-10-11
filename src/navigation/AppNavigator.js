@@ -132,7 +132,7 @@ const AppNavigator = () => {
           ),
         }}
       />
-      {/* <Tab.Screen
+      <Tab.Screen
         name="favourites"
         component={FeedNavigator}
         options={{
@@ -142,7 +142,7 @@ const AppNavigator = () => {
             <Fontisto name="favorite" color={color} size={size} />
           ),
         }}
-      /> */}
+      />
       <Tab.Screen
         name="account"
         component={AccountNavigator}
@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
   },
   tab: {},
   slider: {
-    height: 2.5,
+    height: ,
     left: 10,
     backgroundColor: colors.primary,
     borderRadius: 10,
