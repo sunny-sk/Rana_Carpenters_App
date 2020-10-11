@@ -132,7 +132,17 @@ const AppNavigator = () => {
           ),
         }}
       />
+      {/* <Tab.Screen
+        name="favourites"
+        component={FeedNavigator}
+        options={{
+          tabBarLabel: 'Favourites',
 
+          tabBarIcon: ({color, size}) => (
+            <Fontisto name="favorite" color={color} size={size} />
+          ),
+        }}
+      /> */}
       <Tab.Screen
         name="account"
         component={AccountNavigator}
