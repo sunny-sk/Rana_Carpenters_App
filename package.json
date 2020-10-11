@@ -8,7 +8,7 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "lint": "eslint .",
-    "install:debug": "react-native run-android",
+    "install:dev": "react-native run-android",
     "install:release": "npx react-native run-android --variant=release"
   },
   "dependencies": {

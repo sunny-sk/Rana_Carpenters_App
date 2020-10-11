@@ -8,6 +8,7 @@ import colors from '../constants/colors';
 import AboutUsScreen from '../screens/AboutUsScreen';
 
 const Stack = createStackNavigator();
+//common styles on all tab
 const commonStyle = {
   headerTitleAlign: 'center',
   headerStyle: {
@@ -16,6 +17,7 @@ const commonStyle = {
   },
   headerTintColor: colors.light,
 };
+
 const AccountNavigator = () => {
   return (
     <Stack.Navigator
