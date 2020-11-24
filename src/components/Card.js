@@ -1,6 +1,7 @@
 import React from 'react';
 import {StyleSheet, View, Image, TouchableWithoutFeedback} from 'react-native';
 import colors from '../constants/colors';
+import {formatDate} from '../helper/HelperMethods';
 import AppText from './AppText';
 const Card = ({title, subTitle, imgUrl, onPress, item}) => {
   return (
@@ -9,11 +10,7 @@ const Card = ({title, subTitle, imgUrl, onPress, item}) => {
         <Image style={styles.image} source={{uri: imgUrl}} />
         <View style={styles.detailsContainer}>
           <AppText style={styles.title}>{title}</AppText>
-          <AppText style={styles.date}>{`${new Date(
-            item.createdAt,
-          ).getDate()}/${new Date(item.createdAt).getMonth()}/${new Date(
-            item.createdAt,
-          ).getFullYear()}`}</AppText>
+          <AppText style={styles.date}>{formatDate(item.createdAt)}</AppText>
           <AppText style={styles.subTitle}>{subTitle}</AppText>
         </View>
       </View>
@@ -25,18 +22,29 @@ export default Card;
 
 const styles = StyleSheet.create({
   card: {
+    width: '98%',
+    marginLeft: '1%',
     overflow: 'hidden',
     borderRadius: 15,
     backgroundColor: colors.white,
     marginBottom: 20,
+    shadowOffset: {
+      width: 0,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 15,
+
+    elevation: 2,
   },
   detailsContainer: {
-    padding: 20,
+    paddingVertical: 15,
+    paddingHorizontal: 10,
   },
   date: {
     fontSize: 12,
     marginVertical: 4,
     color: '#2B3252',
+    fontWeight: '700',
   },
   image: {
     width: '100%',
@@ -47,8 +55,8 @@ const styles = StyleSheet.create({
     color: colors.secondry,
   },
   subTitle: {
-    fontWeight: 'bold',
+    fontWeight: '600',
     color: colors.medium,
-    fontSize: 15,
+    fontSize: 12,
   },
 });

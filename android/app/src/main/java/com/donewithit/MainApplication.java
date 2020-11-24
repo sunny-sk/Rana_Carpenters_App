@@ -11,6 +11,7 @@ import com.facebook.soloader.SoLoader;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import com.azendoo.reactnativesnackbar.SnackbarPackage;
+import com.learnium.RNDeviceInfo.RNDeviceInfo;
 
 
 public class MainApplication extends Application implements ReactApplication {

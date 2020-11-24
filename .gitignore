@@ -57,3 +57,10 @@ buck-out/
 
 # CocoaPods
 /ios/Pods/
+
+
+#custom ignores
+google-services.json
+AppSecrets.js
+/my-upload-key.store
+/my-upload-key-old.store

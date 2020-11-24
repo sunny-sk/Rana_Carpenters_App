@@ -1,5 +1,5 @@
 const BASE_URL = 'https://ranacarpenters.herokuapp.com';
-// const BASE_URL = 'http://192.168.43.150:4100';
+// const BASE_URL = 'http://192.168.1.6:4100';
 
 export default {
   _imageBase:
@@ -14,4 +14,5 @@ export default {
   _getAllProducts: BASE_URL + '/api/v1/products',
   _getAllCategories: BASE_URL + '/api/v1/category',
   _getDetails: BASE_URL + '/api/v1/details',
+  _registerDeviceForNotification: BASE_URL + '/api/v1/send-push/registerDevice',
 };

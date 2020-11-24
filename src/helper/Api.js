@@ -76,3 +76,18 @@ export const getAllDetails = async () => {
     throw new Error('server error');
   }
 };
+
+export const registerDeviceToGetNotifications = async (payload) => {
+  try {
+    let result = await fetch(Url._registerDeviceForNotification, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({...payload}),
+    });
+    return result.json();
+  } catch (error) {
+    throw new Error('server error');
+  }
+};
