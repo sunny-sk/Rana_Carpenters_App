@@ -2,7 +2,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import React, {useEffect, useState} from 'react';
 import AccountNavigator from './AccountNavigator';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import Fontisto from 'react-native-vector-icons/Fontisto';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FeedNavigator from './FeedNavigator';
 import colors from '../constants/colors';
 import {
@@ -42,7 +42,7 @@ function MyTabBar({state, descriptors, navigation}) {
           },
         ]}
       />
-      <View style={{flexDirection: 'row', padding: 5}}>
+      <View style={{flexDirection: 'row'}}>
         {state.routes.map((route, index) => {
           const {options} = descriptors[route.key];
 
@@ -90,7 +90,12 @@ function MyTabBar({state, descriptors, navigation}) {
               testID={options.tabBarTestID}
               onPress={onPress}
               onLongPress={onLongPress}
-              style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+              style={{
+                flex: 1,
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: 3,
+              }}>
               <>
                 {options.tabBarIcon({
                   color: isFocused ? colors.primary : colors.medium,
@@ -139,7 +144,7 @@ const AppNavigator = () => {
           tabBarLabel: 'Favourites',
 
           tabBarIcon: ({color, size}) => (
-            <Fontisto name="favorite" color={color} size={size} />
+            <MaterialIcons name="favorite" color={color} size={size} />
           ),
         }}
       />
@@ -173,12 +178,11 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-
     elevation: 10,
   },
   tab: {},
   slider: {
-    height: ,
+    height: 2.3,
     left: 10,
     backgroundColor: colors.primary,
     borderRadius: 10,

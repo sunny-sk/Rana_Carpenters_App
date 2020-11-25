@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {
   StyleSheet,
   ActivityIndicator,
@@ -6,120 +6,16 @@ import {
   TouchableOpacity,
   Dimensions,
   Image,
-  Alert,
-  Vibration,
-  PermissionsAndroid,
 } from 'react-native';
 
-import RNFetchBlob from 'rn-fetch-blob';
 import Icon from './Icon';
+import FastImage from 'react-native-fast-image';
+
 import colors from '../constants/colors';
-import {useNetInfo} from '@react-native-community/netinfo';
 const WIDTH = Dimensions.get('screen').width;
 const CarouselItem = ({imageUrl, ...props}) => {
-  const [connection, setConnection] = useState(true);
-  const netInfo = useNetInfo();
-  const android = RNFetchBlob.android;
-  const [isDownLoading, setIsDownLoading] = useState(false);
   const [imgError, setImageError] = useState(false);
   const [isImageLoading, setIsImageLoading] = useState(true);
-  const handleDownload = async () => {
-    // if device is android you have to ensure you have permission
-    let dirs = RNFetchBlob.fs.dirs;
-
-    const imageName = imageUrl.split('/')[imageUrl.split('/').length - 1];
-    setIsDownLoading(true);
-    RNFetchBlob.config({
-      addAndroidDownloads: {
-        useDownloadManager: true,
-        notification: true,
-        mime: 'image/png',
-        description: 'A product image',
-        path: dirs.DownloadDir + '/carpenter/' + imageName,
-      },
-    })
-      .fetch('GET', imageUrl)
-      .then((res) => {
-        setIsDownLoading(false);
-        Vibration.vibrate(500);
-        Alert.alert(
-          'Product Design download successfully',
-          'Press ok to view image',
-          [
-            {
-              text: 'OK',
-              onPress: () => {
-                android.actionViewIntent(
-                  dirs.DownloadDir + '/carpenter/' + imageName,
-                  'image/png',
-                );
-              },
-            },
-            {
-              text: 'Cancel',
-              onPress: () => console.log('Cancel Pressed'),
-              style: 'cancel',
-            },
-          ],
-          {cancelable: true},
-        );
-      })
-
-      .catch((error) => {
-        setIsDownLoading(false);
-        Alert.alert(
-          'Downloading error',
-          'Failed to save Image: ' + error.message,
-          [{text: 'OK', onPress: () => console.log('OK Pressed')}],
-          {cancelable: false},
-        );
-      });
-  };
-
-  useEffect(() => {
-    setConnection(!connection);
-  }, [netInfo]);
-  const donwLoadImage = async () => {
-    try {
-      const granted = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
-      );
-      if (granted === 'granted') {
-        handleDownload();
-      } else {
-        return false;
-      }
-    } catch (error) {}
-  };
-
-  const checkNet = () => {
-    if (
-      (netInfo.type === 'unknown' || netInfo.type !== 'unknown') &&
-      netInfo.isInternetReachable === false
-    ) {
-      return null;
-    }
-    return (
-      <View style={{}}>
-        <TouchableOpacity
-          style={styles.downLoadBtn}
-          disabled={isDownLoading}
-          onPress={donwLoadImage}>
-          {isDownLoading ? (
-            <ActivityIndicator size={'small'} color="#fff" />
-          ) : (
-            <Icon
-              from="MaterialCommunityIcons"
-              name="download-circle-outline"
-              bgColor="transparent"
-              color={colors.light}
-              size={40}
-            />
-          )}
-        </TouchableOpacity>
-      </View>
-    );
-  };
 
   return (
     <View style={styles.upperContainer}>
@@ -141,11 +37,7 @@ const CarouselItem = ({imageUrl, ...props}) => {
               setIsImageLoading(false);
               setImageError(true);
             }}
-            source={
-              !imageUrl
-                ? require('../assets/images/not-found.png')
-                : {uri: imageUrl}
-            }
+            source={{uri: imageUrl}}
           />
           {isImageLoading ? (
             <>
@@ -160,10 +52,9 @@ const CarouselItem = ({imageUrl, ...props}) => {
               source={require('../assets/images/not-found.png')}
             />
           ) : (
-            <Image
-              resizeMode="cover"
+            <FastImage
               style={styles.image}
-              source={{uri: imageUrl}}
+              source={{uri: imageUrl, priority: FastImage.priority.normal}}
             />
           )}
         </>
@@ -185,7 +76,6 @@ const CarouselItem = ({imageUrl, ...props}) => {
                 />
               </TouchableOpacity>
             </View>
-            {checkNet()}
           </View>
         )}
       </View>

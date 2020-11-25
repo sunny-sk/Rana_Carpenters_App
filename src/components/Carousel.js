@@ -36,6 +36,14 @@ const Carousel = ({images = [], ...props}) => {
     }
   };
 
+  const renderCaroselItem = ({item}) => {
+    return (
+      <>
+        <CarouselItem {...props} imageUrl={url._inventoryBase + item.imgUrl} />
+      </>
+    );
+  };
+
   return (
     <View style={styles.container}>
       {images.length > 0 ? (
@@ -50,27 +58,14 @@ const Carousel = ({images = [], ...props}) => {
           showsHorizontalScrollIndicator={false}
           data={images}
           keyExtractor={(list) => list._id + Math.random.toString()}
-          renderItem={({item}) => {
-            return (
-              <>
-                <CarouselItem
-                  {...props}
-                  imageUrl={url._inventoryBase + item.imgUrl}
-                />
-              </>
-            );
-          }}
+          renderItem={renderCaroselItem}
           onScroll={Animated.event(
             [{nativeEvent: {contentOffset: {x: scrollX}}}],
             {useNativeDriver: false},
           )}
         />
       ) : (
-        <>
-          <View>
-            <CarouselItem imageUrl={undefined} />
-          </View>
-        </>
+        <CarouselItem imageUrl={undefined} />
       )}
 
       {images.length > 1 && (

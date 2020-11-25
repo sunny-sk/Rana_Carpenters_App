@@ -9,10 +9,8 @@ import {useNetInfo} from '@react-native-community/netinfo';
 //custom imports
 import Screen from '../../components/Screen';
 import ListingsScreenView from './ListingsScreenView';
-import {shuffle} from '../../helper/HelperMethods';
 import {getAllProducts, getAllCategories} from '../../helper/Api';
 import colors from '../../constants/colors';
-// import OfflineNotice from '../components/OfflineNotice';
 
 const ListingsScreen = ({navigation}) => {
   const netInfo = useNetInfo();
@@ -28,8 +26,8 @@ const ListingsScreen = ({navigation}) => {
       const response = await getAllProducts();
       setIsLoading(false);
       if (response.success && response.products.length > 0) {
-        setProductListingsTemp(shuffle([...response.products]));
-        setProductListings(shuffle([...response.products]));
+        setProductListingsTemp([...response.products]);
+        setProductListings([...response.products]);
       }
       cb();
     } catch (error) {
@@ -101,31 +99,20 @@ const ListingsScreen = ({navigation}) => {
     });
   }, []);
 
-  // useEffect(() => {
-  //   if (netInfo.type !== 'unknown' && netInfo.isInternetReachable === true) {
-  //     let loading = true;
-  //     fetchAllCategories();
-  //     fetcAllProducts(loading, () => {
-  //       ToastAndroid.show('Data updated successfully', ToastAndroid.SHORT);
-  //     });
-  //   }
-  // }, []);
-
   React.useEffect(() => {
     const unsubscribe = navigation.addListener('focus', async () => {
       // The screen is focused
       try {
         const response = await getAllProducts();
         if (response.success && response.products.length > 0) {
-          setProductListingsTemp(shuffle([...response.products]));
-          setProductListings(shuffle([...response.products]));
+          setProductListingsTemp([...response.products]);
+          setProductListings([...response.products]);
         }
       } catch (error) {
         //nothing to do
       }
     });
 
-    // Return the function to unsubscribe from the event so it gets removed on unmount
     return unsubscribe;
   }, [navigation]);
 

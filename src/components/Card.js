@@ -1,13 +1,31 @@
 import React from 'react';
-import {StyleSheet, View, Image, TouchableWithoutFeedback} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  TouchableWithoutFeedback,
+  Pressable,
+  InteractionManager,
+} from 'react-native';
 import colors from '../constants/colors';
+import FastImage from 'react-native-fast-image';
 import {formatDate} from '../helper/HelperMethods';
+
 import AppText from './AppText';
 const Card = ({title, subTitle, imgUrl, onPress, item}) => {
   return (
-    <TouchableWithoutFeedback onPress={onPress}>
-      <View style={styles.card}>
-        <Image style={styles.image} source={{uri: imgUrl}} />
+    <TouchableWithoutFeedback
+      onPress={() => {
+        onPress();
+      }}
+      style={{height: '100%'}}>
+      <View style={{...styles.card, width: '98%', height: 310}}>
+        <FastImage
+          style={{...styles.image}}
+          source={{
+            uri: imgUrl,
+            priority: FastImage.priority.high,
+          }}
+        />
         <View style={styles.detailsContainer}>
           <AppText style={styles.title}>{title}</AppText>
           <AppText style={styles.date}>{formatDate(item.createdAt)}</AppText>
@@ -18,11 +36,10 @@ const Card = ({title, subTitle, imgUrl, onPress, item}) => {
   );
 };
 
-export default Card;
+export default React.memo(Card);
 
 const styles = StyleSheet.create({
   card: {
-    width: '98%',
     marginLeft: '1%',
     overflow: 'hidden',
     borderRadius: 15,
@@ -33,7 +50,6 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 15,
-
     elevation: 2,
   },
   detailsContainer: {

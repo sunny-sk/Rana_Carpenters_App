@@ -1,5 +1,5 @@
 // Rn imports
-import React, {useState, useRef} from 'react';
+import React from 'react';
 import {
   StyleSheet,
   Text,
@@ -8,6 +8,7 @@ import {
   View,
   Animated,
   RefreshControl,
+  StatusBar,
 } from 'react-native';
 //custom import
 
@@ -27,34 +28,19 @@ const ListingsScreenView = ({
   filterCategory,
   navigation,
 }) => {
-  const scrollY = useState(new Animated.Value(0))[0];
-  const padding = useState(new Animated.Value(50))[0];
-  const scrollPos = useRef();
-  const animate = (value) => {
-    Animated.timing(scrollY, {
-      toValue: value,
-      duration: 200,
-      useNativeDriver: false,
-    }).start();
-    Animated.timing(padding, {
-      toValue: 50,
-      duration: 200,
-      useNativeDriver: false,
-    }).start();
-  };
-  const diffClamp = Animated.diffClamp(scrollY, 0, 50);
-  const diffClam1 = Animated.diffClamp(scrollY, 0, 50);
-  let translateY = diffClamp.interpolate({
-    inputRange: [0, 50],
-    outputRange: [0, -50],
-  });
-  let paddingY = diffClam1.interpolate({
-    inputRange: [0, 50],
-    outputRange: [50, 0],
-  });
+  const renderProductList = ({item}) => (
+    <Card
+      onPress={() => navigation.navigate('listingDetails', item)}
+      title={item.title}
+      item={item}
+      imgUrl={url._imageBase + item.imgUrl}
+      subTitle={item.description}
+    />
+  );
 
   return (
     <>
+      <StatusBar backgroundColor={colors.light} barStyle="dark-content" />
       {isLoading ? (
         <AppActivityIndicator visible={true} />
       ) : (
@@ -62,12 +48,6 @@ const ListingsScreenView = ({
           <Animated.View
             style={{
               ...styles.categoryContainer,
-              // position: 'absolute',
-              // borderWidth: 1,
-              // top: 6,
-              // top: scrollY,
-              transform: [{translateY: translateY}],
-              transform: [{translateY: 0}],
             }}>
             <View>
               <CategoriesList
@@ -80,30 +60,21 @@ const ListingsScreenView = ({
             </View>
           </Animated.View>
           {productListingsTemp && productListingsTemp.length > 0 ? (
-            // <Animated.View style={{paddingTop: paddingY}}>
             <Animated.View style={{flex: 1}}>
               <FlatList
+                getItemLayout={(data, index) => ({
+                  length: 310,
+                  offset: 310 * index,
+                  index,
+                })}
+                keyboardShouldPersistTaps="always"
+                initialNumToRender={10}
+                removeClippedSubviews={true}
                 scrollEventThrottle={16}
                 showsVerticalScrollIndicator={false}
-                onScroll={(e) => {
-                  animate(e.nativeEvent.contentOffset.y);
-                }}
-                ref={scrollPos}
                 data={productListingsTemp}
                 keyExtractor={(list) => list._id + Math.random().toString()}
-                renderItem={({item}) => {
-                  return (
-                    <Card
-                      onPress={() =>
-                        navigation.navigate('listingDetails', item)
-                      }
-                      title={item.title}
-                      item={item}
-                      imgUrl={url._imageBase + item.imgUrl}
-                      subTitle={item.description}
-                    />
-                  );
-                }}
+                renderItem={renderProductList}
                 refreshControl={
                   <RefreshControl
                     refreshing={isLoading}
@@ -115,12 +86,7 @@ const ListingsScreenView = ({
           ) : productListingsTemp &&
             productListingsTemp.length === 0 &&
             activatedCategory ? (
-            <View
-              style={{
-                flex: 1,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
+            <View style={styles.center}>
               <Text style={styles.infoText}>No Design found</Text>
               <TouchableOpacity
                 style={{marginVertical: 10}}
@@ -129,12 +95,7 @@ const ListingsScreenView = ({
               </TouchableOpacity>
             </View>
           ) : (
-            <View
-              style={{
-                flex: 1,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
+            <View style={styles.center}>
               <Text style={styles.infoText}>No Design found</Text>
               <TouchableOpacity
                 style={{marginVertical: 10}}
@@ -166,5 +127,10 @@ const styles = StyleSheet.create({
   infoText: {
     fontSize: 20,
     textAlign: 'center',
+  },
+  center: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
