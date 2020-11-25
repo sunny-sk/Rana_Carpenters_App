@@ -9,7 +9,7 @@ import {
 import colors from '../constants/colors';
 import FastImage from 'react-native-fast-image';
 import {formatDate} from '../helper/HelperMethods';
-
+import LinearGradient from 'react-native-linear-gradient';
 import AppText from './AppText';
 const Card = ({title, subTitle, imgUrl, onPress, item}) => {
   return (
@@ -18,7 +18,7 @@ const Card = ({title, subTitle, imgUrl, onPress, item}) => {
         onPress();
       }}
       style={{height: '100%'}}>
-      <View style={{...styles.card, width: '98%', height: 310}}>
+      <View style={{...styles.card, width: '98%', height: 230}}>
         <FastImage
           style={{...styles.image}}
           source={{
@@ -27,9 +27,32 @@ const Card = ({title, subTitle, imgUrl, onPress, item}) => {
           }}
         />
         <View style={styles.detailsContainer}>
-          <AppText style={styles.title}>{title}</AppText>
-          <AppText style={styles.date}>{formatDate(item.createdAt)}</AppText>
-          <AppText style={styles.subTitle}>{subTitle}</AppText>
+          <LinearGradient
+            // start={{x: 1, y: 0}}
+            // end={{x: 0, y: 1}}
+            // locations={[0, 0.5, 0.6]}
+            style={{
+              flex: 1,
+              paddingVertical: 10,
+              paddingHorizontal: 10,
+              justifyContent: 'flex-end',
+            }}
+            colors={[
+              'rgba(0,0,0,0.0)',
+              'rgba(0,0,0,0.0)',
+              'rgba(0,0,0,0.0)',
+              'rgba(0,0,0,0.1)',
+              'rgba(0,0,0,0.2)',
+              'rgba(0,0,0,0.3)',
+              'rgba(0,0,0,0.4)',
+              'rgba(0,0,0,0.6)',
+              'rgba(0,0,0,0.8)',
+              '#000000',
+            ]}>
+            <AppText style={styles.title}>{title}</AppText>
+            {/* <AppText style={styles.date}>{formatDate(item.createdAt)}</AppText> */}
+            <AppText style={styles.subTitle}>{subTitle}</AppText>
+          </LinearGradient>
         </View>
       </View>
     </TouchableWithoutFeedback>
@@ -53,8 +76,12 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   detailsContainer: {
-    paddingVertical: 15,
-    paddingHorizontal: 10,
+    position: 'absolute',
+    width: '100%',
+    bottom: 0,
+    // backgroundColor: 'rgba(1,0,0,0.5)',
+    height: '80%',
+    justifyContent: 'flex-end',
   },
   date: {
     fontSize: 12,
@@ -64,15 +91,15 @@ const styles = StyleSheet.create({
   },
   image: {
     width: '100%',
-    height: 200,
+    height: 230,
   },
   title: {
     fontWeight: 'bold',
-    color: colors.secondry,
+    color: colors.white,
   },
   subTitle: {
-    fontWeight: '600',
-    color: colors.medium,
+    color: colors.light,
+    opacity: 0.8,
     fontSize: 12,
   },
 });

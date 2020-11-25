@@ -4,7 +4,6 @@ import {StyleSheet, StatusBar, Text, ToastAndroid} from 'react-native';
 
 //third party libs
 import Snackbar from 'react-native-snackbar';
-import {useNetInfo} from '@react-native-community/netinfo';
 
 //custom imports
 import Screen from '../../components/Screen';
@@ -13,7 +12,6 @@ import {getAllProducts, getAllCategories} from '../../helper/Api';
 import colors from '../../constants/colors';
 
 const ListingsScreen = ({navigation}) => {
-  const netInfo = useNetInfo();
   const [activatedCategory, setActivatedCategory] = useState(undefined);
   const [isLoading, setIsLoading] = useState(false);
   const [productListings, setProductListings] = useState([]);
@@ -32,32 +30,16 @@ const ListingsScreen = ({navigation}) => {
       cb();
     } catch (error) {
       setIsLoading(false);
-      if (
-        (netInfo.type === 'unknown' || netInfo.type !== 'unknown') &&
-        netInfo.isInternetReachable === false
-      ) {
-        Snackbar.show({
-          text: 'No Internet connection.',
-          duration: Snackbar.LENGTH_LONG,
-          backgroundColor: 'black',
-          action: {
-            text: 'close',
-            textColor: 'green',
-            onPress: () => Snackbar.dismiss(),
-          },
-        });
-      } else {
-        Snackbar.show({
-          text: 'Try again Later',
-          duration: Snackbar.LENGTH_LONG,
-          backgroundColor: 'black',
-          action: {
-            text: 'close',
-            textColor: 'green',
-            onPress: () => Snackbar.dismiss(),
-          },
-        });
-      }
+      Snackbar.show({
+        text: 'Try again Later',
+        duration: Snackbar.LENGTH_LONG,
+        backgroundColor: 'black',
+        action: {
+          text: 'close',
+          textColor: 'green',
+          onPress: () => Snackbar.dismiss(),
+        },
+      });
       cb();
     }
   };

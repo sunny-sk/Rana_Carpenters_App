@@ -137,7 +137,7 @@ const AppNavigator = () => {
           ),
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="favourites"
         component={FeedNavigator}
         options={{
@@ -147,7 +147,7 @@ const AppNavigator = () => {
             <MaterialIcons name="favorite" color={color} size={size} />
           ),
         }}
-      />
+      /> */}
       <Tab.Screen
         name="account"
         component={AccountNavigator}

@@ -10,10 +10,14 @@ import com.facebook.react.ReactPackage;
 import com.facebook.soloader.SoLoader;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
+// snackbar
 import com.azendoo.reactnativesnackbar.SnackbarPackage;
+// device info
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
-
+// push  notification
 import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage; 
+// linear gradient
+import com.BV.LinearGradient.LinearGradientPackage;
 
 public class MainApplication extends Application implements ReactApplication {
   private final ReactNativeHost mReactNativeHost =

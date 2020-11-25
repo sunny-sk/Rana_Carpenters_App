@@ -6,10 +6,13 @@ import myTheme from './src/navigation/navigationTheme';
 import AppNavigator from './src/navigation/AppNavigator';
 import {getUniqueId} from 'react-native-device-info';
 import messaging from '@react-native-firebase/messaging';
+import NotifService from './src/pushNotification/NotifService';
 import AsyncStorage from '@react-native-community/async-storage';
 import {registerDeviceToGetNotifications} from './src/helper/Api';
+
 enableScreens();
 const App = () => {
+  const notif = new NotifService();
   const registerDevice = async (token) => {
     try {
       let payload = {
@@ -66,6 +69,24 @@ const App = () => {
       requestUserPermission();
     } catch (error) {}
   };
+
+  const show = async (remoteMessage) => {
+    try {
+      const {
+        title,
+        message,
+        subText = '',
+        bigText = '',
+        sound,
+        vibrate,
+      } = remoteMessage.data;
+      // console.log('show -> remoteMessage', remoteMessage);
+      notif.localNotif('sample.mp4', title, message, subText, bigText, vibrate);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     regiterDeviceForNotiHandler();
   }, []);
@@ -74,14 +95,6 @@ const App = () => {
     const unsubscribe = messaging().onMessage(show);
     return unsubscribe;
   }, []);
-
-  const show = async (remoteMessage) => {
-    try {
-      console.log('show -> remoteMessage', remoteMessage);
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   return (
     <SafeAreaProvider>

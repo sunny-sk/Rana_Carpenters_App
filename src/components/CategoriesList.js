@@ -12,8 +12,7 @@ const CategoriesList = ({activatedCategory, lists, onPress}) => {
         style={{}}
         ref={scrollView}
         horizontal
-        showsHorizontalScrollIndicator={false}
-        onContentSizeChange={() => {}}>
+        showsHorizontalScrollIndicator={false}>
         {lists.map((e, i) => {
           return (
             <TouchableOpacity
