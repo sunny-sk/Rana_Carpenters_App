@@ -13,6 +13,7 @@ import java.util.List;
 import com.azendoo.reactnativesnackbar.SnackbarPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 
+import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage; 
 
 public class MainApplication extends Application implements ReactApplication {
   private final ReactNativeHost mReactNativeHost =

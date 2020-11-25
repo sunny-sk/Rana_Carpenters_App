@@ -1,2 +1,10 @@
 220901-621708-941b0c-bc3908-f6aa1c
 color palette
+
+
+search
+settings 
+     - langauge
+     - recommendation
+     - addvertisements
+new badge on new product load
