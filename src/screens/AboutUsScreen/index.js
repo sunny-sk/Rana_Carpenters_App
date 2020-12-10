@@ -46,12 +46,12 @@ const Index = () => {
             appShareLink: details[0].appShareLink,
           });
         }
-        console.log('[About Index] detail fetched');
+        // console.log('[About Index] detail fetched');
         cb();
       }
     } catch (error) {
       setIsLoading(false);
-      console.log('[About Index', error);
+      // console.log('[About Index', error);
     }
   };
 
@@ -80,7 +80,6 @@ const Index = () => {
   };
 
   useEffect(() => {
-    console.log('in About screen');
     fetchAllDetails(() => {});
   }, []);
 

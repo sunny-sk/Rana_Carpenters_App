@@ -6,7 +6,7 @@ export default class NotifService {
     this.lastId = 0;
     this.lastChannelCounter = 0;
 
-    // this.createDefaultChannels();
+    this.createDefaultChannels();
 
     NotificationHandler.attachRegister(onRegister);
     NotificationHandler.attachNotification(onNotification);
@@ -23,47 +23,47 @@ export default class NotifService {
     });
   }
 
-  // createDefaultChannels() {
-  //   PushNotification.createChannel(
-  //     {
-  //       channelId: 'default-channel-id', // (required)
-  //       channelName: `Default channel`, // (required)
-  //       channelDescription: 'A default channel', // (optional) default: undefined.
-  //       soundName: 'default', // (optional) See `soundName` parameter of `localNotification` function
-  //       importance: 4, // (optional) default: 4. Int value of the Android notification importance
-  //       vibrate: true, // (optional) default: true. Creates the default vibration patten if true.
-  //     },
-  //     (created) =>
-  //       console.log(`createChannel 'default-channel-id' returned '${created}'`), // (optional) callback returns whether the channel was created, false means it already existed.
-  //   );
-  //   PushNotification.createChannel(
-  //     {
-  //       channelId: 'sound-channel-id', // (required)
-  //       channelName: `Sound channel`, // (required)
-  //       channelDescription: 'A sound channel', // (optional) default: undefined.
-  //       soundName: 'sample.mp3', // (optional) See `soundName` parameter of `localNotification` function
-  //       importance: 4, // (optional) default: 4. Int value of the Android notification importance
-  //       vibrate: true, // (optional) default: true. Creates the default vibration patten if true.
-  //     },
-  //     (created) =>
-  //       console.log(`createChannel 'sound-channel-id' returned '${created}'`), // (optional) callback returns whether the channel was created, false means it already existed.
-  //   );
-  // }
+  createDefaultChannels() {
+    PushNotification.createChannel(
+      {
+        channelId: 'default-channel-id', // (required)
+        channelName: `Default channel`, // (required)
+        channelDescription: 'A default channel', // (optional) default: undefined.
+        soundName: 'default', // (optional) See `soundName` parameter of `localNotification` function
+        importance: 4, // (optional) default: 4. Int value of the Android notification importance
+        vibrate: true, // (optional) default: true. Creates the default vibration patten if true.
+      },
+      (created) =>
+        console.log(`createChannel 'default-channel-id' returned '${created}'`), // (optional) callback returns whether the channel was created, false means it already existed.
+    );
+    PushNotification.createChannel(
+      {
+        channelId: 'sound-channel-id', // (required)
+        channelName: `Sound channel`, // (required)
+        channelDescription: 'A sound channel', // (optional) default: undefined.
+        soundName: 'sample.mp3', // (optional) See `soundName` parameter of `localNotification` function
+        importance: 4, // (optional) default: 4. Int value of the Android notification importance
+        vibrate: true, // (optional) default: true. Creates the default vibration patten if true.
+      },
+      (created) =>
+        console.log(`createChannel 'sound-channel-id' returned '${created}'`), // (optional) callback returns whether the channel was created, false means it already existed.
+    );
+  }
 
-  // createOrUpdateChannel() {
-  //   this.lastChannelCounter++;
-  //   PushNotification.createChannel(
-  //     {
-  //       channelId: 'custom-channel-id', // (required)
-  //       channelName: `Custom channel - Counter: ${this.lastChannelCounter}`, // (required)
-  //       channelDescription: `A custom channel to categorise your custom notifications. Updated at: ${Date.now()}`, // (optional) default: undefined.
-  //       soundName: 'default', // (optional) See `soundName` parameter of `localNotification` function
-  //       importance: 4, // (optional) default: 4. Int value of the Android notification importance
-  //       vibrate: true, // (optional) default: true. Creates the default vibration patten if true.
-  //     },
-  //     (created) => console.log(`createChannel returned '${created}'`), // (optional) callback returns whether the channel was created, false means it already existed.
-  //   );
-  // }
+  createOrUpdateChannel() {
+    this.lastChannelCounter++;
+    PushNotification.createChannel(
+      {
+        channelId: 'custom-channel-id', // (required)
+        channelName: `Custom channel - Counter: ${this.lastChannelCounter}`, // (required)
+        channelDescription: `A custom channel to categorise your custom notifications. Updated at: ${Date.now()}`, // (optional) default: undefined.
+        soundName: 'default', // (optional) See `soundName` parameter of `localNotification` function
+        importance: 4, // (optional) default: 4. Int value of the Android notification importance
+        vibrate: true, // (optional) default: true. Creates the default vibration patten if true.
+      },
+      (created) => console.log(`createChannel returned '${created}'`), // (optional) callback returns whether the channel was created, false means it already existed.
+    );
+  }
 
   popInitialNotification() {
     PushNotification.popInitialNotification((notification) =>
@@ -80,11 +80,11 @@ export default class NotifService {
       autoCancel: true, // (optional) default: true
       largeIcon: 'icon', // (optional) default: "ic_launcher"
       smallIcon: 'ic_notification', // (optional) default: "ic_notification" with fallback for "ic_launcher"
-      bigText, // (optional) default: "message" prop
-      subText, // (optional) default: none
-      // color: 'red', // (optional) default: system default
-      vibrate, // (optional) default: true
-      vibration: 500, // vibration length in milliseconds, ignored if vibrate=false, default: 1000
+      bigText: bigText, // (optional) default: "message" prop
+      subText: subText, // (optional) default: none
+      color: 'red', // (optional) default: system default
+      vibrate: true, // (optional) default: true
+      vibration: vibrate, // vibration length in milliseconds, ignored if vibrate=false, default: 1000
       tag: 'some_tag', // (optional) add tag to message
       group: 'group', // (optional) add group to message
       groupSummary: false, // (optional) set this notification to be the group summary for a group of notifications, default: false
@@ -162,9 +162,7 @@ export default class NotifService {
   }
 
   cancelNotif() {
-    PushNotification.cancelLocalNotifications({
-      id: '' + this.lastId,
-    });
+    PushNotification.cancelLocalNotifications({id: '' + this.lastId});
   }
 
   cancelAll() {

@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   View,
   StatusBar,
+  ToastAndroid,
 } from 'react-native';
 import RNFetchBlob from 'rn-fetch-blob';
 import Share from 'react-native-share';
@@ -35,6 +36,7 @@ const ListingDetailScreen = ({route, ...props}) => {
 
     setDetails(data);
   }, [route.params]);
+
   const onShare = async () => {
     try {
       let imagePath = null;
@@ -61,11 +63,16 @@ const ListingDetailScreen = ({route, ...props}) => {
               fs.unlink(imagePath);
             })
             .catch((err) => {
-              err && console.log(err);
+              err && console.log('wdf', err);
             });
           return;
+        })
+        .catch((err) => {
+          ToastAndroid.show('Something went wrong', ToastAndroid.SHORT);
         });
-    } catch (error) {}
+    } catch (error) {
+      ToastAndroid.show('Something went wrong', ToastAndroid.SHORT);
+    }
   };
 
   return (

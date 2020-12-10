@@ -6,7 +6,7 @@ import myTheme from './src/navigation/navigationTheme';
 import AppNavigator from './src/navigation/AppNavigator';
 import {getUniqueId} from 'react-native-device-info';
 import messaging from '@react-native-firebase/messaging';
-import NotifService from './src/pushNotification/NotifService';
+import NotifService from './NotifService';
 import AsyncStorage from '@react-native-community/async-storage';
 import {registerDeviceToGetNotifications} from './src/helper/Api';
 
@@ -38,11 +38,11 @@ const App = () => {
         // user has a device token
         let existedToken = JSON.parse(pushToken);
         if (JSON.stringify(newPushToken) === JSON.stringify(existedToken)) {
+          registerDevice(existedToken);
           console.log('push token not changed');
           return;
         } else {
           console.log('push token changed');
-          registerDevice(newPushToken);
           await AsyncStorage.setItem('fcmToken', JSON.stringify(newPushToken));
         }
       } else {
@@ -80,11 +80,8 @@ const App = () => {
         sound,
         vibrate,
       } = remoteMessage.data;
-      // console.log('show -> remoteMessage', remoteMessage);
       notif.localNotif('sample.mp4', title, message, subText, bigText, vibrate);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   useEffect(() => {

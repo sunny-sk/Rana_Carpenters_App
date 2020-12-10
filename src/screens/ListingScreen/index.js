@@ -112,7 +112,7 @@ const ListingsScreen = ({navigation}) => {
             fetcAllProducts(false, () => {
               fetchAllCategories();
             });
-            console.log('clicked');
+            // console.log('clicked');
           }}
           onRefreshClick={() => {
             fetcAllProducts(true, () => {});

@@ -45,7 +45,6 @@ export const getAllProducts = async () => {
     });
     return result.json();
   } catch (error) {
-    console.log(error);
     throw new Error('server error');
   }
 };
@@ -59,7 +58,6 @@ export const getAllCategories = async () => {
     });
     return result.json();
   } catch (error) {
-    console.log(error);
     throw new Error('server error');
   }
 };
