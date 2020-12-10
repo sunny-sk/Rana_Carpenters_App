@@ -13,9 +13,7 @@ import {
 } from 'react-native';
 //custom import
 
-import Card from '../../components/Card';
-import AppActivityIndicator from '../../components/AppActivityIndicator';
-import CategoriesList from '../../components/CategoriesList';
+import {AppActivityIndicator, CategoriesList, Card} from '../../components';
 import url from '../../helper/url';
 import colors from '../../constants/colors';
 

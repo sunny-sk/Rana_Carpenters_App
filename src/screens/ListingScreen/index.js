@@ -7,7 +7,7 @@ import {StyleSheet, StatusBar, ToastAndroid} from 'react-native';
 import Snackbar from 'react-native-snackbar';
 
 //custom imports
-import Screen from '../../components/Screen';
+import {Screen} from '../../components';
 import ListingsScreenView from './ListingsScreenView';
 import {getAllProducts, getAllCategories} from '../../helper/Api';
 import colors from '../../constants/colors';

@@ -10,9 +10,8 @@ import {
 } from 'react-native';
 import RNFetchBlob from 'rn-fetch-blob';
 import Share from 'react-native-share';
-import {AppText, Icon} from '../components';
+import {AppText, Icon, Carousel} from '../components';
 import colors from '../constants/colors';
-import Carousel from '../components/Carousel';
 import url from '../helper/url';
 import {formatDate} from '../helper/HelperMethods';
 const fs = RNFetchBlob.fs;

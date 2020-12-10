@@ -1,11 +1,13 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import ListItem from '../../components/ListItem';
 import colors from '../../constants/colors';
-import Icon from '../../components/Icon';
-import ListItemSeprator from '../../components/ListItemSeprator';
-import {AppText} from '../../components';
-import CallModal from '../../components/CallModal';
+import {
+  AppText,
+  Icon,
+  CallModal,
+  ListItem,
+  ListItemSeprator,
+} from '../../components';
 
 const AboutUsScreenView = ({
   onMailTo,

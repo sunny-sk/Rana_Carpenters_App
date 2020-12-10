@@ -11,7 +11,6 @@ import messaging from '@react-native-firebase/messaging';
 import NotifService from './NotifService';
 import AsyncStorage from '@react-native-community/async-storage';
 import {registerDeviceToGetNotifications} from './src/helper/Api';
-import ErrorBoundry from './src/components/ErrorBoundry';
 
 enableScreens();
 const App = () => {
@@ -29,7 +28,7 @@ const App = () => {
 
   const getToken = async () => {
     try {
-      // await AsyncStorage.removeItem('fcmToken');
+      // await AsyncStorage .removeItem('fcmToken');
       let pushToken = await AsyncStorage.getItem('fcmToken');
       let newGeneratedToken = await messaging().getToken();
       let newPushToken = {
@@ -96,16 +95,12 @@ const App = () => {
     return unsubscribe;
   }, []);
 
-  const onError = () => {};
-
   return (
-    <ErrorBoundry onError={onError}>
-      <SafeAreaProvider>
-        <NavigationContainer theme={myTheme}>
-          <AppNavigator />
-        </NavigationContainer>
-      </SafeAreaProvider>
-    </ErrorBoundry>
+    <SafeAreaProvider>
+      <NavigationContainer theme={myTheme}>
+        <AppNavigator />
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 };
 

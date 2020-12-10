@@ -7,7 +7,7 @@ import {
   FlatList,
   ToastAndroid,
 } from 'react-native';
-import Screen from '../../components/Screen';
+import {Screen} from '../../components';
 import colors from '../../constants/colors';
 import {getAllDetails} from '../../helper/Api';
 import AboutUsScreenView from './AboutUsScreenView';
@@ -40,11 +40,11 @@ const Index = () => {
         const {details: _details} = response;
         if (_details.length > 0) {
           setDetails({
-            email: details[0].email,
-            name: details[0].name,
-            phoneNumbers: details[0].phoneNumbers,
-            website: details[0].website,
-            appShareLink: details[0].appShareLink,
+            email: _details[0].email,
+            name: _details[0].name,
+            phoneNumbers: _details[0].phoneNumbers,
+            website: _details[0].website,
+            appShareLink: _details[0].appShareLink,
           });
         }
         cb();
