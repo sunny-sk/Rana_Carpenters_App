@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, {useRef} from 'react';
 
 import {TouchableOpacity, ScrollView} from 'react-native';
@@ -18,7 +19,6 @@ const CategoriesList = ({activatedCategory, lists, onPress}) => {
             <TouchableOpacity
               key={i}
               style={{
-                // borderWidth: 1,
                 paddingHorizontal: 15,
                 paddingVertical: 8,
                 marginRight: 10,

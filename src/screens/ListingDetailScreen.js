@@ -1,8 +1,8 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, {useEffect, useState} from 'react';
 import {
   StyleSheet,
   ScrollView,
-  Linking,
   TouchableOpacity,
   View,
   StatusBar,
@@ -59,7 +59,7 @@ const ListingDetailScreen = ({route, ...props}) => {
             filename: 'test', // only for base64 file in Android
           };
           Share.shareSingle(shareOptions)
-            .then((res) => {
+            .then((_res) => {
               fs.unlink(imagePath);
             })
             .catch((err) => {
@@ -67,7 +67,7 @@ const ListingDetailScreen = ({route, ...props}) => {
             });
           return;
         })
-        .catch((err) => {
+        .catch((_err) => {
           ToastAndroid.show('Something went wrong', ToastAndroid.SHORT);
         });
     } catch (error) {
@@ -88,7 +88,7 @@ const ListingDetailScreen = ({route, ...props}) => {
                 {formatDate(detail.createdAt)}
               </AppText>
               <AppText style={styles.price}>{detail.description}</AppText>
-              <View style={styles.devider}></View>
+              <View style={styles.devider} />
               <View style={styles.shareContainer}>
                 <AppText style={{paddingRight: 10, fontSize: 18}}>
                   share

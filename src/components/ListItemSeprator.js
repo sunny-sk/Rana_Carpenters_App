@@ -1,10 +1,10 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import colors from '../constants/colors';
-const ListItemSeprator = (props) => {
+const ListItemSeprator = () => {
   return (
     <View style={{backgroundColor: colors.white}}>
-      <View style={styles.seprator}></View>
+      <View style={styles.seprator} />
     </View>
   );
 };

@@ -1,10 +1,12 @@
 import React from 'react';
-import {View} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import LottieView from 'lottie-react-native';
 const AppActivityIndicator = ({visible = false}) => {
-  if (!visible) return null;
+  if (!visible) {
+    return null;
+  }
   return (
-    <View style={{flex: 1}}>
+    <View style={styles.con}>
       <LottieView
         autoPlay={true}
         loop={true}
@@ -16,3 +18,7 @@ const AppActivityIndicator = ({visible = false}) => {
 };
 
 export default AppActivityIndicator;
+
+const styles = StyleSheet.create({
+  con: {flex: 1},
+});

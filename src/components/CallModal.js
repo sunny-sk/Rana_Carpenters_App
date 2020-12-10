@@ -1,4 +1,5 @@
-import React from 'react';
+/* eslint-disable react-native/no-inline-styles */
+import React, {useCallback} from 'react';
 import {
   StyleSheet,
   Modal,
@@ -12,12 +13,37 @@ import Icon from './Icon';
 import AppText from './AppText';
 
 const CallModal = ({visible, onClose, onPress, numbers}) => {
+  const keyExtractor = useCallback(() => (e) => e.phone, []);
+  const renderItem = ({item}) => (
+    <View
+      style={{
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginVertical: 5,
+      }}>
+      <Icon
+        from="MaterialIcons"
+        name="call"
+        bgColor="#090446"
+        color="#FEB95F"
+      />
+      <TouchableHighlight
+        underlayColor={colors.light}
+        style={{padding: 10, marginVertical: 3, flex: 1}}
+        onPress={() => {
+          onPress(item.phone);
+        }}>
+        <AppText>
+          {item.phone} ({item.phoneOwner})
+        </AppText>
+      </TouchableHighlight>
+    </View>
+  );
+
   return (
     <>
       <Modal transparent={true} visible={visible} animationType="slide">
-        <TouchableOpacity
-          style={styles.container}
-          onPress={onClose}></TouchableOpacity>
+        <TouchableOpacity style={styles.container} onPress={onClose} />
         <View style={styles.card}>
           <View style={{alignItems: 'flex-end', padding: 10}}>
             <TouchableOpacity onPress={onClose}>
@@ -33,34 +59,8 @@ const CallModal = ({visible, onClose, onPress, numbers}) => {
           <View style={{padding: 20}}>
             <FlatList
               data={numbers}
-              keyExtractor={(e) => e.phone}
-              renderItem={({item}) => {
-                return (
-                  <View
-                    style={{
-                      flexDirection: 'row',
-                      alignItems: 'center',
-                      marginVertical: 5,
-                    }}>
-                    <Icon
-                      from="MaterialIcons"
-                      name="call"
-                      bgColor="#090446"
-                      color="#FEB95F"
-                    />
-                    <TouchableHighlight
-                      underlayColor={colors.light}
-                      style={{padding: 10, marginVertical: 3, flex: 1}}
-                      onPress={() => {
-                        onPress(item.phone);
-                      }}>
-                      <AppText>
-                        {item.phone} ({item.phoneOwner})
-                      </AppText>
-                    </TouchableHighlight>
-                  </View>
-                );
-              }}
+              keyExtractor={keyExtractor}
+              renderItem={renderItem}
             />
           </View>
         </View>

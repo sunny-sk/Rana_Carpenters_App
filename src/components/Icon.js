@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {View} from 'react-native';
 import colors from '../constants/colors';
@@ -41,7 +42,7 @@ const Icon = ({
   color = colors.white,
   from = 'AntDesign',
 }) => {
-  let Icon = VectorIcons[from];
+  let _Icon = VectorIcons[from];
   return (
     <View
       style={{
@@ -52,7 +53,7 @@ const Icon = ({
         alignItems: 'center',
         backgroundColor: bgColor,
       }}>
-      <Icon name={name} size={size / 2} color={color} />
+      <_Icon name={name} size={size / 2} color={color} />
     </View>
   );
 };

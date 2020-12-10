@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
 import React, {useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
@@ -9,6 +11,7 @@ import messaging from '@react-native-firebase/messaging';
 import NotifService from './NotifService';
 import AsyncStorage from '@react-native-community/async-storage';
 import {registerDeviceToGetNotifications} from './src/helper/Api';
+import ErrorBoundry from './src/components/ErrorBoundry';
 
 enableScreens();
 const App = () => {
@@ -93,12 +96,16 @@ const App = () => {
     return unsubscribe;
   }, []);
 
+  const onError = () => {};
+
   return (
-    <SafeAreaProvider>
-      <NavigationContainer theme={myTheme}>
-        <AppNavigator />
-      </NavigationContainer>
-    </SafeAreaProvider>
+    <ErrorBoundry onError={onError}>
+      <SafeAreaProvider>
+        <NavigationContainer theme={myTheme}>
+          <AppNavigator />
+        </NavigationContainer>
+      </SafeAreaProvider>
+    </ErrorBoundry>
   );
 };
 

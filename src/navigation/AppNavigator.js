@@ -1,8 +1,8 @@
+/* eslint-disable react-native/no-inline-styles */
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import React, {useEffect, useState} from 'react';
 import AccountNavigator from './AccountNavigator';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FeedNavigator from './FeedNavigator';
 import colors from '../constants/colors';
 import {
@@ -137,17 +137,6 @@ const AppNavigator = () => {
           ),
         }}
       />
-      {/* <Tab.Screen
-        name="favourites"
-        component={FeedNavigator}
-        options={{
-          tabBarLabel: 'Favourites',
-
-          tabBarIcon: ({color, size}) => (
-            <MaterialIcons name="favorite" color={color} size={size} />
-          ),
-        }}
-      /> */}
       <Tab.Screen
         name="account"
         component={AccountNavigator}

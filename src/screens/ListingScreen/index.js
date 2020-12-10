@@ -1,6 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 // Rn imports
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, StatusBar, Text, ToastAndroid} from 'react-native';
+import {StyleSheet, StatusBar, ToastAndroid} from 'react-native';
 
 //third party libs
 import Snackbar from 'react-native-snackbar';
@@ -20,7 +21,9 @@ const ListingsScreen = ({navigation}) => {
 
   const fetcAllProducts = async (loading, cb) => {
     try {
-      if (loading) setIsLoading(true);
+      if (loading) {
+        setIsLoading(true);
+      }
       const response = await getAllProducts();
       setIsLoading(false);
       if (response.success && response.products.length > 0) {
@@ -66,11 +69,13 @@ const ListingsScreen = ({navigation}) => {
 
   const filterCategory = (filterName) => {
     setActivatedCategory(filterName === 'All' ? 'All' : filterName);
-    if (filterName === 'All') setProductListingsTemp([...productListings]);
-    else
+    if (filterName === 'All') {
+      setProductListingsTemp([...productListings]);
+    } else {
       setProductListingsTemp([
         ...productListings.filter((e) => e.category === filterName),
       ]);
+    }
   };
 
   useEffect(() => {

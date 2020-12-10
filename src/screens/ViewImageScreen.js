@@ -1,6 +1,7 @@
+/* eslint-disable react-native/no-inline-styles */
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect, useState} from 'react';
 import {
-  Image,
   StyleSheet,
   Pressable,
   View,
@@ -23,8 +24,8 @@ const ViewImageScreen = ({route, navigation}) => {
   const netInfo = useNetInfo();
   const [imgUrl, setImgUrl] = useState(route.params.imgUrl);
   useEffect(() => {
-    const {imgUrl} = route.params;
-    setImgUrl(imgUrl);
+    const {imgUrl: _imgUrl} = route.params;
+    setImgUrl(_imgUrl);
   }, [route.params]);
 
   const handleDownload = async () => {
@@ -104,7 +105,7 @@ const ViewImageScreen = ({route, navigation}) => {
     } else {
       if (isDownLoading) {
         return <ActivityIndicator size="small" color={colors.white} />;
-      } else
+      } else {
         return (
           <Pressable
             android_ripple={{color: 'white', borderless: true}}
@@ -118,6 +119,7 @@ const ViewImageScreen = ({route, navigation}) => {
             />
           </Pressable>
         );
+      }
     }
   };
 
@@ -183,6 +185,5 @@ const styles = StyleSheet.create({
   image: {
     width: '100%',
     height: '100%',
-    // borderWidth: 1,
   },
 });

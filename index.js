@@ -11,10 +11,9 @@ messaging().setBackgroundMessageHandler(async (remoteMessage) => {
     message,
     subText = '',
     bigText = '',
-    sound,
+    sound = 'sample.mp4',
     vibrate,
   } = remoteMessage.data;
-  notif.localNotif('sample.mp4', title, message, subText, bigText, vibrate);
-  // console.log('npmMessage handled in the background!', remoteMessage);
+  notif.localNotif(sound, title, message, subText, bigText, vibrate);
 });
 AppRegistry.registerComponent(appName, () => App);

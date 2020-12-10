@@ -1,14 +1,8 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {
-  StyleSheet,
-  View,
-  TouchableWithoutFeedback,
-  Pressable,
-  InteractionManager,
-} from 'react-native';
+import {StyleSheet, View, TouchableWithoutFeedback} from 'react-native';
 import colors from '../constants/colors';
 import FastImage from 'react-native-fast-image';
-import {formatDate} from '../helper/HelperMethods';
 import LinearGradient from 'react-native-linear-gradient';
 import AppText from './AppText';
 const Card = ({title, subTitle, imgUrl, onPress, item}) => {
@@ -28,9 +22,6 @@ const Card = ({title, subTitle, imgUrl, onPress, item}) => {
         />
         <View style={styles.detailsContainer}>
           <LinearGradient
-            // start={{x: 1, y: 0}}
-            // end={{x: 0, y: 1}}
-            // locations={[0, 0.5, 0.6]}
             style={{
               flex: 1,
               paddingVertical: 10,

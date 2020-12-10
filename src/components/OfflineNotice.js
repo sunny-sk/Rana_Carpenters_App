@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {StyleSheet, StatusBar, Text, View} from 'react-native';
 import colors from '../constants/colors';
@@ -11,10 +12,6 @@ const OfflineNotice = () => {
   ) {
     return (
       <>
-        {/* <StatusBar
-          backgroundColor={colors.secondry2}
-          barStyle={'light-content'}
-        /> */}
         <StatusBar backgroundColor={colors.light} barStyle={'dark-content'} />
         <View style={styles.container}>
           <View style={styles.info}>

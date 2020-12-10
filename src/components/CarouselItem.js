@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, {useState} from 'react';
 import {
   StyleSheet,
@@ -16,7 +17,10 @@ const WIDTH = Dimensions.get('screen').width;
 const CarouselItem = ({imageUrl, ...props}) => {
   const [imgError, setImageError] = useState(false);
   const [isImageLoading, setIsImageLoading] = useState(true);
-
+  const onError = (_err) => {
+    setIsImageLoading(false);
+    setImageError(true);
+  };
   return (
     <View style={styles.upperContainer}>
       <View style={styles.container}>
@@ -33,10 +37,7 @@ const CarouselItem = ({imageUrl, ...props}) => {
             onLoadStart={() => {
               setIsImageLoading(true);
             }}
-            onError={(err) => {
-              setIsImageLoading(false);
-              setImageError(true);
-            }}
+            onError={onError}
             source={{uri: imageUrl}}
           />
           {isImageLoading ? (

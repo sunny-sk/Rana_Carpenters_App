@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 // Rn imports
 import React from 'react';
 import {
@@ -116,7 +117,6 @@ const styles = StyleSheet.create({
     height: 50,
     marginBottom: 5,
     zIndex: 10,
-    backgroundColor: 'white',
     right: 0,
     backgroundColor: colors.light,
     left: 0,

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useState, useEffect} from 'react';
 import {
   StyleSheet,
@@ -36,8 +37,8 @@ const Index = () => {
     try {
       const response = await getAllDetails();
       if (response.success && response.details.length > 0) {
-        const {details} = response;
-        if (details.length > 0) {
+        const {details: _details} = response;
+        if (_details.length > 0) {
           setDetails({
             email: details[0].email,
             name: details[0].name,
@@ -46,12 +47,10 @@ const Index = () => {
             appShareLink: details[0].appShareLink,
           });
         }
-        // console.log('[About Index] detail fetched');
         cb();
       }
     } catch (error) {
       setIsLoading(false);
-      // console.log('[About Index', error);
     }
   };
 
