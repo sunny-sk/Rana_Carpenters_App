@@ -7,6 +7,7 @@ import {
   FlatList,
   ToastAndroid,
 } from 'react-native';
+import {EMAIL, NAME, PHONE_NUMBERS, WEBSITE} from '../../constants/contants';
 import {Screen} from '../../components';
 import colors from '../../constants/colors';
 import {getAllDetails} from '../../helper/Api';
@@ -15,24 +16,16 @@ const Index = () => {
   const [callModalVisible, setCallModalVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [details, setDetails] = useState({
-    email: 'desk.carpenter@gmail.com',
-    name: 'Rana Carpenters',
-    website: 'https://ranacarpenters.web.app',
-    phoneNumbers: [
-      {
-        phone: '9891521824',
-        phoneOwner: 'Suresh Rana',
-      },
-      {
-        phone: '9711427145',
-        phoneOwner: 'Vijay Rana',
-      },
-    ],
+    email: EMAIL,
+    name: NAME,
+    website: WEBSITE,
+    phoneNumbers: PHONE_NUMBERS,
     appShareLink: null,
   });
-  const onCall = (number) => {
-    Linking.openURL(`tel:${number}`);
-  };
+  const onCall = (number) => Linking.openURL(`tel:${number}`);
+  const onMailTo = () => Linking.openURL(`mailto:${details.email}`);
+  const openWebsite = () => Linking.openURL(details.website);
+
   const fetchAllDetails = async (cb) => {
     try {
       const response = await getAllDetails();
@@ -52,14 +45,6 @@ const Index = () => {
     } catch (error) {
       setIsLoading(false);
     }
-  };
-
-  const onMailTo = () => {
-    Linking.openURL(`mailto:${details.email}`);
-  };
-
-  const openWebsite = () => {
-    Linking.openURL(details.website);
   };
 
   const onAppShare = () => {
@@ -82,24 +67,26 @@ const Index = () => {
     fetchAllDetails(() => {});
   }, []);
 
+  const keyExtractor = (list) => list + Math.random().toString();
+
+  const renderItem = () => (
+    <AboutUsScreenView
+      onMailTo={onMailTo}
+      details={details}
+      onOpenWebsite={openWebsite}
+      onCall={onCall}
+      onAppShare={onAppShare}
+      callModalVisible={callModalVisible}
+      setCallModalVisible={setCallModalVisible}
+    />
+  );
+
   return (
     <Screen style={styles.screen}>
       <FlatList
         data={[1]}
-        keyExtractor={(list) => list + Math.random().toString()}
-        renderItem={() => {
-          return (
-            <AboutUsScreenView
-              onMailTo={onMailTo}
-              details={details}
-              onOpenWebsite={openWebsite}
-              onCall={onCall}
-              onAppShare={onAppShare}
-              callModalVisible={callModalVisible}
-              setCallModalVisible={(e) => setCallModalVisible(e)}
-            />
-          );
-        }}
+        keyExtractor={keyExtractor}
+        renderItem={renderItem}
         refreshControl={
           <RefreshControl refreshing={isLoading} onRefresh={onRefresh} />
         }

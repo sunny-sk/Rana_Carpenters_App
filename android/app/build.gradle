@@ -203,6 +203,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics'
     implementation project(':react-native-device-info')
     implementation project(':react-native-push-notification')
+    implementation project(':react-native-share')
     implementation project(':react-native-linear-gradient')
     // addUnimodulesDependencies()
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {

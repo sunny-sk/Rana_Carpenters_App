@@ -18,6 +18,9 @@ import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage; 
 // linear gradient
 import com.BV.LinearGradient.LinearGradientPackage;
+//react-native share
+import cl.json.RNSharePackage;
+import cl.json.ShareApplication;
 
 public class MainApplication extends Application implements ReactApplication {
   private final ReactNativeHost mReactNativeHost =
@@ -33,7 +36,6 @@ public class MainApplication extends Application implements ReactApplication {
           List<ReactPackage> packages = new PackageList(this).getPackages();
           // Packages that cannot be autolinked yet can be added manually here, for example:
           // packages.add(new MyReactNativePackage());
-// Add unimodules
           // List<ReactPackage> unimodules = Arrays.<ReactPackage>asList(
           //   new ModuleRegistryAdapter(mModuleRegistryProvider)
           // );

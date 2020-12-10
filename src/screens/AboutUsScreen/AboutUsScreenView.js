@@ -18,6 +18,13 @@ const AboutUsScreenView = ({
   callModalVisible,
   setCallModalVisible,
 }) => {
+  const onOpen = () => {
+    setCallModalVisible(true);
+  };
+  const onClose = () => {
+    setCallModalVisible(false);
+  };
+
   return (
     <>
       <View style={styles.container}>
@@ -30,9 +37,7 @@ const AboutUsScreenView = ({
       </View>
       <View style={styles.container}>
         <ListItem
-          onPress={() => {
-            setCallModalVisible(true);
-          }}
+          onPress={onOpen}
           title={'Make a call'}
           iconComponent={
             <Icon
@@ -87,7 +92,7 @@ const AboutUsScreenView = ({
         visible={callModalVisible}
         numbers={details.phoneNumbers}
         onPress={onCall}
-        onClose={() => setCallModalVisible(false)}
+        onClose={onClose}
       />
     </>
   );
