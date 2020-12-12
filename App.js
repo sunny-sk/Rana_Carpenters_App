@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {enableScreens} from 'react-native-screens';
@@ -11,9 +11,16 @@ import messaging from '@react-native-firebase/messaging';
 import NotifService from './NotifService';
 import AsyncStorage from '@react-native-community/async-storage';
 import {registerDeviceToGetNotifications} from './src/helper/Api';
-
+import {OnBoardingScreen} from './src/screens';
+import {
+  createStackNavigator,
+  CardStyleInterpolators,
+} from '@react-navigation/stack';
+import SplashScreen from 'react-native-splash-screen';
+const Stack = createStackNavigator();
 enableScreens();
 const App = () => {
+  const [isFirstLanuch, setIsFirstLaunch] = useState(null);
   const notif = new NotifService();
   const registerDevice = async (token) => {
     try {
@@ -95,13 +102,50 @@ const App = () => {
     return unsubscribe;
   }, []);
 
-  return (
-    <SafeAreaProvider>
-      <NavigationContainer theme={myTheme}>
-        <AppNavigator />
-      </NavigationContainer>
-    </SafeAreaProvider>
-  );
+  useEffect(() => {
+    AsyncStorage.getItem('alreadyLaunched').then((value) => {
+      if (value) {
+        setIsFirstLaunch(false);
+      } else {
+        AsyncStorage.setItem('alreadyLaunched', 'asdf');
+        setIsFirstLaunch(true);
+      }
+    });
+  }, []);
+
+  useEffect(() => SplashScreen.hide(), []);
+  if (isFirstLanuch) {
+    return (
+      <SafeAreaProvider>
+        <NavigationContainer theme={myTheme}>
+          <Stack.Navigator>
+            <Stack.Screen
+              options={{
+                headerShown: false,
+              }}
+              name="onBoardingScreen"
+              component={OnBoardingScreen}
+            />
+            <Stack.Screen
+              options={{
+                headerShown: false,
+              }}
+              name="MainApp"
+              component={AppNavigator}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </SafeAreaProvider>
+    );
+  } else {
+    return (
+      <SafeAreaProvider>
+        <NavigationContainer theme={myTheme}>
+          <AppNavigator />
+        </NavigationContainer>
+      </SafeAreaProvider>
+    );
+  }
 };
 
 export default App;

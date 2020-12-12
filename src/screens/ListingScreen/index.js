@@ -5,14 +5,13 @@ import {StyleSheet, StatusBar, ToastAndroid} from 'react-native';
 
 //third party libs
 import Snackbar from 'react-native-snackbar';
-
 //custom imports
 import {Screen} from '../../components';
 import ListingsScreenView from './ListingsScreenView';
 import {getAllProducts, getAllCategories} from '../../helper/Api';
 import colors from '../../constants/colors';
 
-const ListingsScreen = ({navigation}) => {
+const ListingsScreen = ({navigation, ...props}) => {
   const [activatedCategory, setActivatedCategory] = useState(undefined);
   const [isLoading, setIsLoading] = useState(false);
   const [productListings, setProductListings] = useState([]);
@@ -46,6 +45,7 @@ const ListingsScreen = ({navigation}) => {
       cb();
     }
   };
+
   const fetchAllCategories = async () => {
     try {
       const response = await getAllCategories();
@@ -108,6 +108,7 @@ const ListingsScreen = ({navigation}) => {
       <StatusBar backgroundColor={colors.light} barStyle={'dark-content'} />
       <Screen style={styles.screen}>
         <ListingsScreenView
+          {...props}
           navigation={navigation}
           isLoading={isLoading}
           productListingsTemp={productListingsTemp}

@@ -23,6 +23,7 @@
     "@react-navigation/bottom-tabs": "^5.7.3",
     "@react-navigation/native": "^5.7.2",
     "@react-navigation/stack": "^5.8.0",
+    "add": "^2.0.6",
     "babel-plugin-transform-remove-console": "^6.9.4",
     "lottie-react-native": "^3.5.0",
     "react": "16.13.1",
@@ -31,6 +32,7 @@
     "react-native-fast-image": "^8.3.4",
     "react-native-gesture-handler": "^1.7.0",
     "react-native-linear-gradient": "^2.5.6",
+    "react-native-onboarding-swiper": "^1.1.4",
     "react-native-push-notification": "^6.1.3",
     "react-native-reanimated": "^1.10.1",
     "react-native-safe-area-context": "^3.1.1",
@@ -39,7 +41,8 @@
     "react-native-snackbar": "^2.2.3",
     "react-native-splash-screen": "^3.2.0",
     "react-native-vector-icons": "^7.0.0",
-    "rn-fetch-blob": "^0.12.0"
+    "rn-fetch-blob": "^0.12.0",
+    "yarn": "^1.22.10"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",

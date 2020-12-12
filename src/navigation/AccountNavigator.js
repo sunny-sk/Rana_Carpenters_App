@@ -5,8 +5,7 @@ import {
   CardStyleInterpolators,
 } from '@react-navigation/stack';
 import colors from '../constants/colors';
-import AboutUsScreen from '../screens/AboutUsScreen';
-
+import {AboutUsScreen} from '../screens';
 const Stack = createStackNavigator();
 //common styles on all tab
 const commonStyle = {

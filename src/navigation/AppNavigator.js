@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import AccountNavigator from './AccountNavigator';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FeedNavigator from './FeedNavigator';
@@ -13,7 +13,6 @@ import {
   StyleSheet,
   Animated,
 } from 'react-native';
-import SplashScreen from 'react-native-splash-screen';
 
 const Tab = createBottomTabNavigator();
 //customizing tabBar
@@ -123,7 +122,6 @@ function MyTabBar({state, descriptors, navigation}) {
 //tab bar base
 
 const AppNavigator = () => {
-  useEffect(() => SplashScreen.hide(), []);
   return (
     <Tab.Navigator tabBar={(props) => <MyTabBar {...props} />}>
       <Tab.Screen

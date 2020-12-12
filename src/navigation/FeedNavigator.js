@@ -2,10 +2,9 @@ import React from 'react';
 
 import {createStackNavigator} from '@react-navigation/stack';
 
-import ListingDetailScreen from '../screens/ListingDetailScreen';
-import ListingsScreen from '../screens/ListingScreen';
+import {ViewImageScreen, ListingDetailScreen, ListingsScreen} from '../screens';
+
 import {Dimensions} from 'react-native';
-import ViewImageScreen from '../screens/ViewImageScreen';
 const HEIGHT = Dimensions.get('screen').height;
 const Stack = createStackNavigator();
 const commonStyle = {
