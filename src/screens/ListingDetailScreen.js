@@ -17,6 +17,7 @@ import {formatDate} from '../helper/HelperMethods';
 const fs = RNFetchBlob.fs;
 const ListingDetailScreen = ({route, ...props}) => {
   const [detail, setDetails] = useState(undefined);
+
   useEffect(() => {
     const data = route.params;
     let index = -1;
@@ -51,13 +52,13 @@ const ListingDetailScreen = ({route, ...props}) => {
         })
         .then((base64Data) => {
           const shareOptions = {
-            title: 'Share via whatsapp',
+            // title: 'Share via whatsapp',
             message: `*Rana Carpenters*\n${detail.title}\n\nclick below to open design on browser \n------------------------------------\n${detail.share_url}`,
             url: `data:image/png;base64,${base64Data}`,
-            social: Share.Social.WHATSAPP,
+            // social: Share.Social.WHATSAPP,
             filename: 'test', // only for base64 file in Android
           };
-          Share.shareSingle(shareOptions)
+          Share.open(shareOptions)
             .then((_res) => {
               fs.unlink(imagePath);
             })
@@ -94,10 +95,11 @@ const ListingDetailScreen = ({route, ...props}) => {
                 </AppText>
                 <TouchableOpacity onPress={onShare}>
                   <Icon
-                    from="FontAwesome"
-                    name="whatsapp"
-                    bgColor="#4FCE5D"
-                    size={40}
+                    size={35}
+                    color={colors.light}
+                    name={'share-variant'}
+                    bgColor={colors.secondry2}
+                    from={'MaterialCommunityIcons'}
                   />
                 </TouchableOpacity>
               </View>
