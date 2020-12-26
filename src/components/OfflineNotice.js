@@ -1,8 +1,9 @@
 /* eslint-disable react-native/no-inline-styles */
+import { useNetInfo } from '@react-native-community/netinfo';
 import React from 'react';
-import {StyleSheet, StatusBar, Text, View} from 'react-native';
+import { StatusBar, StyleSheet, Text, View } from 'react-native';
+
 import colors from '../constants/colors';
-import {useNetInfo} from '@react-native-community/netinfo';
 const STATUS_BAR_HEIGHT = StatusBar.currentHeight;
 const OfflineNotice = () => {
   const netInfo = useNetInfo();
@@ -15,7 +16,7 @@ const OfflineNotice = () => {
         <StatusBar backgroundColor={colors.light} barStyle={'dark-content'} />
         <View style={styles.container}>
           <View style={styles.info}>
-            <Text style={{fontSize: 18, color: '#fad744'}}>
+            <Text style={{ fontSize: 18, color: '#fad744' }}>
               No Internet Connection
             </Text>
           </View>

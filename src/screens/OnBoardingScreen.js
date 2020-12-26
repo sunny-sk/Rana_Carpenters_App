@@ -1,17 +1,17 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {
-  StyleSheet,
-  View,
-  Image,
   Dimensions,
+  Image,
   StatusBar,
   TouchableOpacity,
+  View,
 } from 'react-native';
 import Onboarding from 'react-native-onboarding-swiper';
-import {Icon} from '../components';
+
+import { Icon } from '../components';
 const WIDTH = Dimensions.get('screen').width;
-const OnBoardingScreen = ({navigation}) => {
+const OnBoardingScreen = ({ navigation }) => {
   return (
     <>
       <StatusBar backgroundColor="#f8f4f4" />
@@ -64,7 +64,7 @@ const OnBoardingScreen = ({navigation}) => {
             image: (
               <>
                 <Image
-                  style={{height: 350, width: WIDTH, resizeMode: 'center'}}
+                  style={{ height: 350, width: WIDTH, resizeMode: 'center' }}
                   source={require('../assets/images/modern.png')}
                 />
               </>
@@ -78,7 +78,11 @@ const OnBoardingScreen = ({navigation}) => {
               <>
                 {/* <StatusBar backgroundColor="#f8f4f4" /> */}
                 <Image
-                  style={{height: 350, width: WIDTH - 40, resizeMode: 'center'}}
+                  style={{
+                    height: 350,
+                    width: WIDTH - 40,
+                    resizeMode: 'center',
+                  }}
                   source={require('../assets/images/Qa.png')}
                 />
               </>
@@ -92,7 +96,7 @@ const OnBoardingScreen = ({navigation}) => {
             image: (
               <>
                 <Image
-                  style={{height: 350, width: WIDTH, resizeMode: 'center'}}
+                  style={{ height: 350, width: WIDTH, resizeMode: 'center' }}
                   source={require('../assets/images/fast.png')}
                 />
               </>
@@ -108,5 +112,3 @@ const OnBoardingScreen = ({navigation}) => {
 };
 
 export default OnBoardingScreen;
-
-const styles = StyleSheet.create({});

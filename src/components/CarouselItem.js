@@ -1,23 +1,22 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
-  StyleSheet,
   ActivityIndicator,
-  View,
-  TouchableOpacity,
   Dimensions,
   Image,
+  StyleSheet,
+  TouchableOpacity,
+  View,
 } from 'react-native';
-
-import Icon from './Icon';
 import FastImage from 'react-native-fast-image';
 
 import colors from '../constants/colors';
+import Icon from './Icon';
 const WIDTH = Dimensions.get('screen').width;
-const CarouselItem = ({imageUrl, ...props}) => {
+const CarouselItem = ({ imageUrl, ...props }) => {
   const [imgError, setImageError] = useState(false);
   const [isImageLoading, setIsImageLoading] = useState(true);
-  const onError = (_err) => {
+  const onError = () => {
     setIsImageLoading(false);
     setImageError(true);
   };
@@ -27,7 +26,7 @@ const CarouselItem = ({imageUrl, ...props}) => {
         <>
           <Image
             resizeMode="cover"
-            style={{...styles.image, display: 'none'}}
+            style={{ ...styles.image, display: 'none' }}
             onLoad={() => {
               setIsImageLoading(true);
             }}
@@ -38,11 +37,11 @@ const CarouselItem = ({imageUrl, ...props}) => {
               setIsImageLoading(true);
             }}
             onError={onError}
-            source={{uri: imageUrl}}
+            source={{ uri: imageUrl }}
           />
           {isImageLoading ? (
             <>
-              <View style={{flex: 1, justifyContent: 'center'}}>
+              <View style={{ flex: 1, justifyContent: 'center' }}>
                 <ActivityIndicator color="red" size="large" />
               </View>
             </>
@@ -55,13 +54,13 @@ const CarouselItem = ({imageUrl, ...props}) => {
           ) : (
             <FastImage
               style={styles.image}
-              source={{uri: imageUrl, priority: FastImage.priority.normal}}
+              source={{ uri: imageUrl, priority: FastImage.priority.normal }}
             />
           )}
         </>
         {!imgError && !isImageLoading && (
           <View style={styles.btns}>
-            <View style={{marginVertical: 5}}>
+            <View style={{ marginVertical: 5 }}>
               <TouchableOpacity
                 onPress={() => {
                   props.navigation.navigate('viewImageScreen', {

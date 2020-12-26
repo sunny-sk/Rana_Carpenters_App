@@ -2,7 +2,7 @@ import Url from './url';
 
 export const loginUser = async (data) => {
   try {
-    const {email, password} = data;
+    const { email, password } = data;
     let result = await fetch(Url._login, {
       method: 'POST',
       headers: {
@@ -21,13 +21,13 @@ export const loginUser = async (data) => {
 
 export const registerUser = async (data) => {
   try {
-    const {name, email, password} = data;
+    const { name, email, password } = data;
     let result = await fetch(Url._register, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({name, email, password}),
+      body: JSON.stringify({ name, email, password }),
     });
     return result.json();
   } catch (error) {
@@ -82,7 +82,7 @@ export const registerDeviceToGetNotifications = async (payload) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({...payload}),
+      body: JSON.stringify({ ...payload }),
     });
     return result.json();
   } catch (error) {

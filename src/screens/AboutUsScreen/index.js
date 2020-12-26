@@ -1,12 +1,15 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import React, {useState, useEffect} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
-  StyleSheet,
+  FlatList,
   Linking,
   RefreshControl,
-  FlatList,
+  StyleSheet,
   ToastAndroid,
 } from 'react-native';
+import Share from 'react-native-share';
+
+import { Screen } from '../../components';
+import colors from '../../constants/colors';
 import {
   EMAIL,
   LOGO_BASE_64,
@@ -14,11 +17,8 @@ import {
   PHONE_NUMBERS,
   WEBSITE,
 } from '../../constants/contants';
-import {Screen} from '../../components';
-import colors from '../../constants/colors';
-import {getAllDetails} from '../../helper/Api';
+import { getAllDetails } from '../../helper/Api';
 import AboutUsScreenView from './AboutUsScreenView';
-import Share from 'react-native-share';
 const Index = () => {
   const [callModalVisible, setCallModalVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -37,7 +37,7 @@ const Index = () => {
     try {
       const response = await getAllDetails();
       if (response.success && response.details.length > 0) {
-        const {details: _details} = response;
+        const { details: _details } = response;
         if (_details.length > 0) {
           setDetails({
             email: _details[0].email,
@@ -60,7 +60,7 @@ const Index = () => {
       title: '',
       url: LOGO_BASE_64,
     })
-      .then((_) => {})
+      .then(() => {})
       .catch((err) => {
         err && console.log(err);
       });
@@ -74,7 +74,7 @@ const Index = () => {
       ToastAndroid.showWithGravity(
         'Details fetched successfully',
         ToastAndroid.SHORT,
-        ToastAndroid.BOTTOM,
+        ToastAndroid.BOTTOM
       );
     });
   };

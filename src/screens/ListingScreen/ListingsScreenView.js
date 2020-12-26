@@ -2,20 +2,20 @@
 // Rn imports
 import React from 'react';
 import {
+  Animated,
+  FlatList,
+  RefreshControl,
+  StatusBar,
   StyleSheet,
   Text,
   TouchableOpacity,
-  FlatList,
   View,
-  Animated,
-  RefreshControl,
-  StatusBar,
 } from 'react-native';
-//custom import
 
-import {AppActivityIndicator, CategoriesList, Card} from '../../components';
-import url from '../../helper/url';
+//custom import
+import { AppActivityIndicator, Card, CategoriesList } from '../../components';
 import colors from '../../constants/colors';
+import url from '../../helper/url';
 
 const ListingsScreenView = ({
   isLoading,
@@ -27,7 +27,7 @@ const ListingsScreenView = ({
   filterCategory,
   navigation,
 }) => {
-  const renderProductList = ({item}) => (
+  const renderProductList = ({ item }) => (
     <Card
       onPress={() => navigation.navigate('listingDetails', item)}
       title={item.title}
@@ -59,7 +59,7 @@ const ListingsScreenView = ({
             </View>
           </Animated.View>
           {productListingsTemp && productListingsTemp.length > 0 ? (
-            <Animated.View style={{flex: 1}}>
+            <Animated.View style={{ flex: 1 }}>
               <FlatList
                 getItemLayout={(data, index) => ({
                   length: 310,
@@ -88,18 +88,18 @@ const ListingsScreenView = ({
             <View style={styles.center}>
               <Text style={styles.infoText}>No Design found</Text>
               <TouchableOpacity
-                style={{marginVertical: 10}}
+                style={{ marginVertical: 10 }}
                 onPress={onRefreshClick}>
-                <Text style={{color: colors.primary}}>Refresh</Text>
+                <Text style={{ color: colors.primary }}>Refresh</Text>
               </TouchableOpacity>
             </View>
           ) : (
             <View style={styles.center}>
               <Text style={styles.infoText}>No Design found</Text>
               <TouchableOpacity
-                style={{marginVertical: 10}}
+                style={{ marginVertical: 10 }}
                 onPress={onRefreshClick}>
-                <Text style={{color: colors.primary}}>Refresh</Text>
+                <Text style={{ color: colors.primary }}>Refresh</Text>
               </TouchableOpacity>
             </View>
           )}

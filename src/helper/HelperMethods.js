@@ -1,7 +1,7 @@
 export const shuffle = (array) => {
-  var currentIndex = array.length,
-    temporaryValue,
-    randomIndex;
+  let currentIndex = array.length,
+    randomIndex,
+    temporaryValue;
 
   // While there remain elements to shuffle...
   while (currentIndex !== 0) {
@@ -19,6 +19,6 @@ export const shuffle = (array) => {
 
 export const formatDate = (date) => {
   return `${new Date(date).getDate()}/${new Date(date).getMonth()}/${new Date(
-    date,
+    date
   ).getFullYear()}`;
 };

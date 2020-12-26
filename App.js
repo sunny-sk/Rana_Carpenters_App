@@ -1,22 +1,23 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
-import React, {useEffect, useState} from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {SafeAreaProvider} from 'react-native-safe-area-context';
-import {enableScreens} from 'react-native-screens';
-import myTheme from './src/navigation/navigationTheme';
-import AppNavigator from './src/navigation/AppNavigator';
-import {getUniqueId} from 'react-native-device-info';
-import messaging from '@react-native-firebase/messaging';
-import NotifService from './NotifService';
 import AsyncStorage from '@react-native-community/async-storage';
-import {registerDeviceToGetNotifications} from './src/helper/Api';
-import {OnBoardingScreen} from './src/screens';
+import messaging from '@react-native-firebase/messaging';
+import { NavigationContainer } from '@react-navigation/native';
 import {
-  createStackNavigator,
   CardStyleInterpolators,
+  createStackNavigator,
 } from '@react-navigation/stack';
+import React, { useEffect, useState } from 'react';
+import { getUniqueId } from 'react-native-device-info';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { enableScreens } from 'react-native-screens';
 import SplashScreen from 'react-native-splash-screen';
+
+import NotifService from './NotifService';
+import { registerDeviceToGetNotifications } from './src/helper/Api';
+import AppNavigator from './src/navigation/AppNavigator';
+import myTheme from './src/navigation/navigationTheme';
+import { OnBoardingScreen } from './src/screens';
 const Stack = createStackNavigator();
 enableScreens();
 const App = () => {
@@ -113,7 +114,7 @@ const App = () => {
     });
   }, []);
 
-  useEffect(() => SplashScreen.hide(), []);
+  // useEffect(() => SplashScreen.hide(), []);
   if (isFirstLanuch) {
     return (
       <SafeAreaProvider>

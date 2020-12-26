@@ -1,22 +1,24 @@
 /* eslint-disable react-native/no-inline-styles */
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import React, {useState} from 'react';
-import AccountNavigator from './AccountNavigator';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import FeedNavigator from './FeedNavigator';
-import colors from '../constants/colors';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import React, { useEffect, useState } from 'react';
 import {
-  View,
-  Pressable,
-  Text,
-  Dimensions,
-  StyleSheet,
   Animated,
+  Dimensions,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
 } from 'react-native';
+import SplashScreen from 'react-native-splash-screen';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+
+import colors from '../constants/colors';
+import AccountNavigator from './AccountNavigator';
+import FeedNavigator from './FeedNavigator';
 
 const Tab = createBottomTabNavigator();
 //customizing tabBar
-function MyTabBar({state, descriptors, navigation}) {
+function MyTabBar({ state, descriptors, navigation }) {
   //scren deimensions
   const totalWidth = Dimensions.get('window').width;
   const tabWidth = totalWidth / state.routes.length;
@@ -36,14 +38,14 @@ function MyTabBar({state, descriptors, navigation}) {
         style={[
           styles.slider,
           {
-            transform: [{translateX: translateValue}],
+            transform: [{ translateX: translateValue }],
             width: tabWidth - 20,
           },
         ]}
       />
-      <View style={{flexDirection: 'row'}}>
+      <View style={{ flexDirection: 'row' }}>
         {state.routes.map((route, index) => {
-          const {options} = descriptors[route.key];
+          const { options } = descriptors[route.key];
 
           const label =
             options.tabBarLabel !== undefined
@@ -81,7 +83,7 @@ function MyTabBar({state, descriptors, navigation}) {
           return (
             <Pressable
               android_disableSound={false}
-              android_ripple={{color: '#c4c4c4'}}
+              android_ripple={{ color: '#c4c4c4' }}
               key={index}
               accessibilityRole="button"
               accessibilityStates={isFocused ? ['selected'] : []}
@@ -122,6 +124,7 @@ function MyTabBar({state, descriptors, navigation}) {
 //tab bar base
 
 const AppNavigator = () => {
+  useEffect(() => SplashScreen.hide(), []);
   return (
     <Tab.Navigator tabBar={(props) => <MyTabBar {...props} />}>
       <Tab.Screen
@@ -130,7 +133,7 @@ const AppNavigator = () => {
         options={{
           tabBarLabel: 'Furnitures',
 
-          tabBarIcon: ({color, size}) => (
+          tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="home" color={color} size={size} />
           ),
         }}
@@ -140,7 +143,7 @@ const AppNavigator = () => {
         component={AccountNavigator}
         options={{
           tabBarLabel: 'About us',
-          tabBarIcon: ({color, size}) => (
+          tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="account" color={color} size={size} />
           ),
         }}

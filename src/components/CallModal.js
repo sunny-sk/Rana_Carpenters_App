@@ -1,20 +1,21 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useCallback} from 'react';
+import React, { useCallback } from 'react';
 import {
-  StyleSheet,
-  Modal,
-  View,
-  TouchableOpacity,
   FlatList,
+  Modal,
+  StyleSheet,
   TouchableHighlight,
+  TouchableOpacity,
+  View,
 } from 'react-native';
-import colors from '../constants/colors';
-import Icon from './Icon';
-import AppText from './AppText';
 
-const CallModal = ({visible, onClose, onPress, numbers}) => {
+import colors from '../constants/colors';
+import AppText from './AppText';
+import Icon from './Icon';
+
+const CallModal = ({ visible, onClose, onPress, numbers }) => {
   const keyExtractor = useCallback(() => (e) => e.phone, []);
-  const renderItem = ({item}) => (
+  const renderItem = ({ item }) => (
     <View
       style={{
         flexDirection: 'row',
@@ -29,7 +30,7 @@ const CallModal = ({visible, onClose, onPress, numbers}) => {
       />
       <TouchableHighlight
         underlayColor={colors.light}
-        style={{padding: 10, marginVertical: 3, flex: 1}}
+        style={{ padding: 10, marginVertical: 3, flex: 1 }}
         onPress={() => {
           onPress(item.phone);
         }}>
@@ -45,7 +46,7 @@ const CallModal = ({visible, onClose, onPress, numbers}) => {
       <Modal transparent={true} visible={visible} animationType="slide">
         <TouchableOpacity style={styles.container} onPress={onClose} />
         <View style={styles.card}>
-          <View style={{alignItems: 'flex-end', padding: 10}}>
+          <View style={{ alignItems: 'flex-end', padding: 10 }}>
             <TouchableOpacity onPress={onClose}>
               <Icon
                 from="AntDesign"
@@ -56,7 +57,7 @@ const CallModal = ({visible, onClose, onPress, numbers}) => {
               />
             </TouchableOpacity>
           </View>
-          <View style={{padding: 20}}>
+          <View style={{ padding: 20 }}>
             <FlatList
               data={numbers}
               keyExtractor={keyExtractor}

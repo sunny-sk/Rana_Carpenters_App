@@ -1,13 +1,13 @@
 import React from 'react';
 import {
-  StyleSheet,
-  SafeAreaView,
-  View,
-  StatusBar,
   Platform,
+  SafeAreaView,
+  StatusBar,
+  StyleSheet,
+  View,
 } from 'react-native';
 const STATUSBAR_HEIGHT = StatusBar.currentHeight;
-const Screen = ({children, style}) => {
+const Screen = ({ children, style }) => {
   return (
     <SafeAreaView style={[styles.screen]}>
       <View style={[styles.view, style]}>{children}</View>

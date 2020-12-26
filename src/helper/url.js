@@ -1,5 +1,5 @@
 const BASE_URL = 'https://ranacarpenters.herokuapp.com';
-// const BASE_URL = 'http://192.168.1.6:4100';
+// const BASE_URL = 'http://192.168.1.5:4100';
 
 export default {
   _imageBase:

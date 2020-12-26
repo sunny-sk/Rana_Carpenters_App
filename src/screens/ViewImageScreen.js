@@ -1,30 +1,31 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {useEffect, useState} from 'react';
+import { useNetInfo } from '@react-native-community/netinfo';
+import React, { useEffect, useState } from 'react';
 import {
-  StyleSheet,
-  Pressable,
-  View,
-  StatusBar,
-  Vibration,
+  ActivityIndicator,
   Alert,
   PermissionsAndroid,
-  ActivityIndicator,
+  Pressable,
+  StatusBar,
+  StyleSheet,
+  Vibration,
+  View,
 } from 'react-native';
-import colors from '../constants/colors';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FastImage from 'react-native-fast-image';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import RNFetchBlob from 'rn-fetch-blob';
-import {useNetInfo} from '@react-native-community/netinfo';
+
+import colors from '../constants/colors';
 const dirs = RNFetchBlob.fs.dirs;
-const ViewImageScreen = ({route, navigation}) => {
+const ViewImageScreen = ({ route, navigation }) => {
   const android = RNFetchBlob.android;
   const [isDownLoading, setIsDownLoading] = useState(false);
   const [connection, setConnection] = useState(true);
   const netInfo = useNetInfo();
   const [imgUrl, setImgUrl] = useState(route.params.imgUrl);
   useEffect(() => {
-    const {imgUrl: _imgUrl} = route.params;
+    const { imgUrl: _imgUrl } = route.params;
     setImgUrl(_imgUrl);
   }, [route.params]);
 
@@ -43,7 +44,7 @@ const ViewImageScreen = ({route, navigation}) => {
       },
     })
       .fetch('GET', imgUrl)
-      .then((res) => {
+      .then(() => {
         setIsDownLoading(false);
         Vibration.vibrate(500);
         Alert.alert(
@@ -54,8 +55,8 @@ const ViewImageScreen = ({route, navigation}) => {
               text: 'OK',
               onPress: () => {
                 android.actionViewIntent(
-                  dirs.DownloadDir + '/carpenter/' + imageName,
-                  'image/png',
+                  `${dirs.DownloadDir}/carpenter/${imageName}`,
+                  'image/png'
                 );
               },
             },
@@ -65,7 +66,7 @@ const ViewImageScreen = ({route, navigation}) => {
               style: 'cancel',
             },
           ],
-          {cancelable: true},
+          { cancelable: true }
         );
       })
 
@@ -74,8 +75,8 @@ const ViewImageScreen = ({route, navigation}) => {
         Alert.alert(
           'Downloading error',
           'Failed to save Image: ' + error.message,
-          [{text: 'OK', onPress: () => console.log('OK Pressed')}],
-          {cancelable: false},
+          [{ text: 'OK', onPress: () => console.log('OK Pressed') }],
+          { cancelable: false }
         );
       });
   };
@@ -83,7 +84,7 @@ const ViewImageScreen = ({route, navigation}) => {
   const downloadImageHandler = async () => {
     try {
       const granted = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+        PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE
       );
       if (granted === 'granted') {
         handleDownload();
@@ -108,7 +109,7 @@ const ViewImageScreen = ({route, navigation}) => {
       } else {
         return (
           <Pressable
-            android_ripple={{color: 'white', borderless: true}}
+            android_ripple={{ color: 'white', borderless: true }}
             onPress={downloadImageHandler}
             disabled={isDownLoading}
             style={styles.closeIcon}>
@@ -132,7 +133,7 @@ const ViewImageScreen = ({route, navigation}) => {
           <FastImage
             resizeMode={FastImage.resizeMode.contain}
             style={styles.image}
-            source={{uri: imgUrl, priority: FastImage.priority.high}}
+            source={{ uri: imgUrl, priority: FastImage.priority.high }}
           />
         ) : (
           //TODO:// Show no image here
@@ -153,7 +154,7 @@ const ViewImageScreen = ({route, navigation}) => {
             paddingVertical: 30,
           }}>
           <Pressable
-            android_ripple={{color: 'white', borderless: true}}
+            android_ripple={{ color: 'white', borderless: true }}
             onPress={() => {
               navigation.goBack();
             }}

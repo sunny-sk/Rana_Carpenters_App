@@ -1,17 +1,17 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 // Rn imports
-import React, {useEffect, useState} from 'react';
-import {StyleSheet, StatusBar, ToastAndroid} from 'react-native';
-
+import React, { useEffect, useState } from 'react';
+import { StatusBar, StyleSheet } from 'react-native';
 //third party libs
 import Snackbar from 'react-native-snackbar';
-//custom imports
-import {Screen} from '../../components';
-import ListingsScreenView from './ListingsScreenView';
-import {getAllProducts, getAllCategories} from '../../helper/Api';
-import colors from '../../constants/colors';
 
-const ListingsScreen = ({navigation, ...props}) => {
+//custom imports
+import { Screen } from '../../components';
+import colors from '../../constants/colors';
+import { getAllCategories, getAllProducts } from '../../helper/Api';
+import ListingsScreenView from './ListingsScreenView';
+
+const ListingsScreen = ({ navigation, ...props }) => {
   const [activatedCategory, setActivatedCategory] = useState(undefined);
   const [isLoading, setIsLoading] = useState(false);
   const [productListings, setProductListings] = useState([]);
@@ -82,7 +82,7 @@ const ListingsScreen = ({navigation, ...props}) => {
     let loading = true;
     fetchAllCategories();
     fetcAllProducts(loading, () => {
-      ToastAndroid.show('List updated successfully', ToastAndroid.SHORT);
+      // ToastAndroid.show('List updated successfully', ToastAndroid.SHORT);
     });
   }, []);
 

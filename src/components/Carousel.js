@@ -1,20 +1,21 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useRef, useState} from 'react';
+import React, { useRef, useState } from 'react';
 import {
-  StyleSheet,
+  Animated,
   Dimensions,
   FlatList,
-  Animated,
-  View,
+  StyleSheet,
   TouchableOpacity,
+  View,
 } from 'react-native';
-import CarouselItem from './CarouselItem';
+
 import colors from '../constants/colors';
-import Icon from './Icon';
 import url from '../helper/url';
+import CarouselItem from './CarouselItem';
+import Icon from './Icon';
 const WIDTH = Dimensions.get('screen').width;
 
-const Carousel = ({images = [], ...props}) => {
+const Carousel = ({ images = [], ...props }) => {
   const scrollX = new Animated.Value(0);
   let position = Animated.divide(scrollX, WIDTH);
   let scrollView = useRef();
@@ -25,7 +26,7 @@ const Carousel = ({images = [], ...props}) => {
       let p = scrolled + WIDTH;
       setScrolled(p);
       setScrollValue(scrollValue + 1);
-      scrollView.current.scrollToOffset({Animated: true, offset: p});
+      scrollView.current.scrollToOffset({ Animated: true, offset: p });
     }
   };
   const swipLeft = () => {
@@ -33,11 +34,11 @@ const Carousel = ({images = [], ...props}) => {
       let p = scrolled - WIDTH;
       setScrolled(p);
       setScrollValue(scrollValue - 1);
-      scrollView.current.scrollToOffset({Animated: true, offset: p});
+      scrollView.current.scrollToOffset({ Animated: true, offset: p });
     }
   };
 
-  const renderCaroselItem = ({item}) => {
+  const renderCaroselItem = ({ item }) => {
     return (
       <>
         <CarouselItem {...props} imageUrl={url._inventoryBase + item.imgUrl} />
@@ -61,8 +62,8 @@ const Carousel = ({images = [], ...props}) => {
           keyExtractor={(list) => list._id + Math.random.toString()}
           renderItem={renderCaroselItem}
           onScroll={Animated.event(
-            [{nativeEvent: {contentOffset: {x: scrollX}}}],
-            {useNativeDriver: false},
+            [{ nativeEvent: { contentOffset: { x: scrollX } } }],
+            { useNativeDriver: false }
           )}
         />
       ) : (
@@ -71,7 +72,7 @@ const Carousel = ({images = [], ...props}) => {
 
       {images.length > 1 && (
         <>
-          <View style={{position: 'absolute', right: 0}}>
+          <View style={{ position: 'absolute', right: 0 }}>
             <TouchableOpacity onPress={swipRight}>
               <Icon
                 from="AntDesign"
@@ -82,7 +83,7 @@ const Carousel = ({images = [], ...props}) => {
               />
             </TouchableOpacity>
           </View>
-          <View style={{position: 'absolute', left: 0}}>
+          <View style={{ position: 'absolute', left: 0 }}>
             <TouchableOpacity onPress={swipLeft}>
               <Icon
                 from="AntDesign"

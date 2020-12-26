@@ -1,28 +1,29 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
-  StyleSheet,
   ScrollView,
+  StatusBar,
+  StyleSheet,
+  ToastAndroid,
   TouchableOpacity,
   View,
-  StatusBar,
-  ToastAndroid,
 } from 'react-native';
-import RNFetchBlob from 'rn-fetch-blob';
 import Share from 'react-native-share';
-import {AppText, Icon, Carousel} from '../components';
+import RNFetchBlob from 'rn-fetch-blob';
+
+import { AppText, Carousel, Icon } from '../components';
 import colors from '../constants/colors';
+import { formatDate } from '../helper/HelperMethods';
 import url from '../helper/url';
-import {formatDate} from '../helper/HelperMethods';
 const fs = RNFetchBlob.fs;
-const ListingDetailScreen = ({route, ...props}) => {
+const ListingDetailScreen = ({ route, ...props }) => {
   const [detail, setDetails] = useState(undefined);
 
   useEffect(() => {
     const data = route.params;
     let index = -1;
     if (data.more_images.length === 0) {
-      data.more_images.push({imgUrl: data.imgUrl, _id: data.imgUrl});
+      data.more_images.push({ imgUrl: data.imgUrl, _id: data.imgUrl });
     } else {
       data.more_images.map((e, i) => {
         if (e.imgUrl === data.imgUrl) {
@@ -30,7 +31,7 @@ const ListingDetailScreen = ({route, ...props}) => {
         }
       });
       if (index < 0) {
-        data.more_images.push({imgUrl: data.imgUrl, _id: data.imgUrl});
+        data.more_images.push({ imgUrl: data.imgUrl, _id: data.imgUrl });
       }
     }
 
@@ -59,7 +60,7 @@ const ListingDetailScreen = ({route, ...props}) => {
             filename: 'test', // only for base64 file in Android
           };
           Share.open(shareOptions)
-            .then((_res) => {
+            .then(() => {
               fs.unlink(imagePath);
             })
             .catch((err) => {
@@ -67,7 +68,7 @@ const ListingDetailScreen = ({route, ...props}) => {
             });
           return;
         })
-        .catch((_err) => {
+        .catch(() => {
           ToastAndroid.show('Something went wrong', ToastAndroid.SHORT);
         });
     } catch (error) {
@@ -76,7 +77,7 @@ const ListingDetailScreen = ({route, ...props}) => {
   };
 
   return (
-    <View style={{flex: 1}}>
+    <View style={{ flex: 1 }}>
       {detail && (
         <>
           <StatusBar backgroundColor={colors.light} barStyle="dark-content" />
@@ -90,7 +91,7 @@ const ListingDetailScreen = ({route, ...props}) => {
               <AppText style={styles.price}>{detail.description}</AppText>
               <View style={styles.devider} />
               <View style={styles.shareContainer}>
-                <AppText style={{paddingRight: 10, fontSize: 18}}>
+                <AppText style={{ paddingRight: 10, fontSize: 18 }}>
                   share
                 </AppText>
                 <TouchableOpacity onPress={onShare}>
@@ -117,7 +118,7 @@ const styles = StyleSheet.create({
   detailContainer: {
     padding: 20,
   },
-  date: {fontSize: 14, marginTop: 5, color: colors.medium},
+  date: { fontSize: 14, marginTop: 5, color: colors.medium },
   image: {
     width: '100%',
     height: 300,

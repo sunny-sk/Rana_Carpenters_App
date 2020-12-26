@@ -1,11 +1,11 @@
+import {
+  CardStyleInterpolators,
+  createStackNavigator,
+} from '@react-navigation/stack';
 import React from 'react';
 
-import {
-  createStackNavigator,
-  CardStyleInterpolators,
-} from '@react-navigation/stack';
 import colors from '../constants/colors';
-import {AboutUsScreen} from '../screens';
+import { AboutUsScreen } from '../screens';
 const Stack = createStackNavigator();
 //common styles on all tab
 const commonStyle = {
@@ -25,7 +25,7 @@ const AccountNavigator = () => {
       }}>
       <Stack.Screen
         name="account"
-        options={{title: '', ...commonStyle, headerShown: false}}
+        options={{ title: '', ...commonStyle, headerShown: false }}
         component={AboutUsScreen}
       />
     </Stack.Navigator>

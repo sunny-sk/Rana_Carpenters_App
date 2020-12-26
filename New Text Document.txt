@@ -8,3 +8,8 @@ settings
      - recommendation
      - addvertisements
 new badge on new product load
+// mode="card" headerMode="float"  gives cool animation
+// MYAPP_UPLOAD_STORE_FILE = 'my-upload-key.keystore';
+// MYAPP_UPLOAD_KEY_ALIAS = 'my-key-alias';
+// MYAPP_UPLOAD_STORE_PASSWORD = 'ranacarpenters123';
+// MYAPP_UPLOAD_KEY_PASSWORD = 'ranacarpenters123';

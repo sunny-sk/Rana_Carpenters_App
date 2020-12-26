@@ -1,11 +1,12 @@
 import React from 'react';
-import {Text, StyleSheet, Platform} from 'react-native';
+import { Platform, StyleSheet, Text } from 'react-native';
+
 import colors from '../constants/colors';
 
-const AppText = ({children, style, ...otherProps}) => {
+const AppText = ({ children, style, ...otherProps }) => {
   return (
     <>
-      <Text {...otherProps} style={{...styles.text, ...style}}>
+      <Text {...otherProps} style={{ ...styles.text, ...style }}>
         {children}
       </Text>
     </>

@@ -1,10 +1,12 @@
+import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
+import { Dimensions } from 'react-native';
 
-import {createStackNavigator} from '@react-navigation/stack';
-
-import {ViewImageScreen, ListingDetailScreen, ListingsScreen} from '../screens';
-
-import {Dimensions} from 'react-native';
+import {
+  ListingDetailScreen,
+  ListingsScreen,
+  ViewImageScreen,
+} from '../screens';
 const HEIGHT = Dimensions.get('screen').height;
 const Stack = createStackNavigator();
 const commonStyle = {
@@ -16,7 +18,7 @@ const commonStyle = {
 };
 const FeedNavigator = () => {
   return (
-    <Stack.Navigator mode="modal" screenOptions={{headerShown: false}}>
+    <Stack.Navigator mode="modal" screenOptions={{ headerShown: false }}>
       <Stack.Screen
         name="listings"
         options={{

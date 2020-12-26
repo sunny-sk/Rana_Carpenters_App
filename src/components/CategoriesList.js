@@ -1,11 +1,11 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useRef} from 'react';
+import React, { useRef } from 'react';
+import { ScrollView, TouchableOpacity } from 'react-native';
 
-import {TouchableOpacity, ScrollView} from 'react-native';
-import AppText from './AppText';
 import colors from '../constants/colors';
+import AppText from './AppText';
 
-const CategoriesList = ({activatedCategory, lists, onPress}) => {
+const CategoriesList = ({ activatedCategory, lists, onPress }) => {
   const scrollView = useRef();
   return (
     <>

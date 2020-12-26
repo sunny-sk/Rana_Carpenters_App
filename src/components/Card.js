@@ -1,20 +1,17 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {StyleSheet, View, TouchableWithoutFeedback} from 'react-native';
-import colors from '../constants/colors';
+import { StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import LinearGradient from 'react-native-linear-gradient';
+
+import colors from '../constants/colors';
 import AppText from './AppText';
-const Card = ({title, subTitle, imgUrl, onPress, item}) => {
+const Card = ({ title, subTitle, imgUrl, onPress }) => {
   return (
-    <TouchableWithoutFeedback
-      onPress={() => {
-        onPress();
-      }}
-      style={{height: '100%'}}>
-      <View style={{...styles.card, width: '98%', height: 230}}>
+    <TouchableWithoutFeedback onPress={onPress} style={{ height: '100%' }}>
+      <View style={{ ...styles.card, width: '98%', height: 230 }}>
         <FastImage
-          style={{...styles.image}}
+          style={{ ...styles.image }}
           source={{
             uri: imgUrl,
             priority: FastImage.priority.high,

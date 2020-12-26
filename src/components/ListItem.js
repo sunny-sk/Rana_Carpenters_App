@@ -1,9 +1,10 @@
 import React from 'react';
-import {StyleSheet, Image, TouchableHighlight, View} from 'react-native';
-import AppText from './AppText';
-import colors from '../constants/colors';
+import { Image, StyleSheet, TouchableHighlight, View } from 'react-native';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import Entypo from 'react-native-vector-icons/Entypo';
+
+import colors from '../constants/colors';
+import AppText from './AppText';
 const ListItem = ({
   imgUrl,
   title,
@@ -19,7 +20,7 @@ const ListItem = ({
         <View style={[styles.container, style]}>
           {iconComponent}
           {imgUrl && <Image style={styles.image} source={imgUrl} />}
-          <View style={{...styles.detailsContainer}}>
+          <View style={{ ...styles.detailsContainer }}>
             <AppText numberOfLines={1} style={styles.title}>
               {title}
             </AppText>
