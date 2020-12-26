@@ -16,7 +16,7 @@ const ListItem = ({
 }) => {
   return (
     <Swipeable renderRightActions={renderRightAction}>
-      <TouchableHighlight underlayColor={colors.light} onPress={onPress}>
+      <TouchableHighlight underlayColor={colors.gray} onPress={onPress}>
         <View style={[styles.container, style]}>
           {iconComponent}
           {imgUrl && <Image style={styles.image} source={imgUrl} />}

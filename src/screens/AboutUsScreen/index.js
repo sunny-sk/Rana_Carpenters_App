@@ -62,7 +62,7 @@ const Index = () => {
     })
       .then(() => {})
       .catch((err) => {
-        err && console.log(err);
+        console.log(err);
       });
     // Linking.openURL(
     //   `whatsapp://send?text=*Rana Carpenters*\n\nclick below to download our android application\n------------------------------------\n${details.appShareLink}`,

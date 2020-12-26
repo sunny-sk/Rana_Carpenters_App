@@ -3,6 +3,7 @@ import React, { useCallback } from 'react';
 import {
   FlatList,
   Modal,
+  StatusBar,
   StyleSheet,
   TouchableHighlight,
   TouchableOpacity,
@@ -14,7 +15,7 @@ import AppText from './AppText';
 import Icon from './Icon';
 
 const CallModal = ({ visible, onClose, onPress, numbers }) => {
-  const keyExtractor = useCallback(() => (e) => e.phone, []);
+  const keyExtractor = useCallback((e) => e.phone, []);
   const renderItem = ({ item }) => (
     <View
       style={{
@@ -43,7 +44,11 @@ const CallModal = ({ visible, onClose, onPress, numbers }) => {
 
   return (
     <>
-      <Modal transparent={true} visible={visible} animationType="slide">
+      <Modal transparent={true} visible={visible} animationType="fade">
+        <StatusBar
+          backgroundColor={'rgba(0,0,0,.8)'}
+          barStyle="light-content"
+        />
         <TouchableOpacity style={styles.container} onPress={onClose} />
         <View style={styles.card}>
           <View style={{ alignItems: 'flex-end', padding: 10 }}>

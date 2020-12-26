@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StatusBar, StyleSheet, View } from 'react-native';
 
 import {
   AppText,
@@ -28,6 +28,7 @@ const AboutUsScreenView = ({
 
   return (
     <>
+      <StatusBar backgroundColor={colors.light} barStyle="dark-content" />
       <View style={styles.container}>
         <ListItem
           onPress={onMailTo}
