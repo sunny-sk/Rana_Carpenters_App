@@ -85,7 +85,7 @@ const AboutUsScreenView = ({
         )}
       </View>
       <View style={styles.aboutContainer}>
-        <AppText style={styles.version}>V1.2.0</AppText>
+        <AppText style={styles.version}>V2.0.0</AppText>
         <AppText style={styles.developedBy}>
           Copyright © 2020. All rights reserved
         </AppText>
